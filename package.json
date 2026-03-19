@@ -6,21 +6,22 @@
   "main": "main.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "dev": "npm run lint && vite build --watch --mode development",
-    "lint:fix": "npm run lint -- -- -- fix",
-    "prettier": "npx prettier src test --check",
-    "prettier:fix": "npm run prettier -- -- write",
-    "format": "npm run prettier:fix && npm run lint:fix",
+    "dev": "bun run lint && vite build --watch --mode development",
+    "lint:fix": "bun run lint -- -- -- fix",
+    "prettier": "bunx prettier src test --check",
+    "prettier:fix": "bun run prettier -- -- write",
+    "format": "bun run prettier:fix && bun run lint:fix",
     "build:nolint": "NODE_ENV=production rollup -c",
     "build": "vite build",
     "test": "jest",
-    "test:watch": "yarn test -- --watch"
+    "test:watch": "bun run test -- --watch"
   },
   "dependencies": {
     "obsidian": "0.16.3",
     "obsidian-daily-notes-interface": "^0.9.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-popper": "^2.3.0",
     "tiny-undo": "^0.0.10"
   },
   "devDependencies": {
