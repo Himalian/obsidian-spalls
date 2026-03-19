@@ -7,7 +7,7 @@
   height: auto;
   background-color: transparent;
 
-  > .common-editor-inputer {
+  .rta, .rta__textarea, > .common-editor-inputer {
     display: inline-block;
     width: 100%;
     min-height: 24px;
@@ -16,7 +16,9 @@
     line-height: 24px;
     resize: none;
     overflow-x: hidden;
-    // overflow-y: scroll;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
     background-color: transparent;
     z-index: 1;
     margin-bottom: 4px;
@@ -28,6 +30,9 @@
     }
 
     &:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
       &::placeholder {
         color: lightgray;
       }
@@ -98,7 +103,7 @@
   height: auto;
   background-color: transparent;
 
-  > .common-editor-inputer {
+  .rta, .rta__textarea, > .common-editor-inputer {
     display: inline-block;
     width: 100%;
     min-height: 24px;
@@ -107,7 +112,9 @@
     line-height: 24px;
     resize: none;
     overflow-x: hidden;
-    // overflow-y: scroll;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
     background-color: transparent;
     z-index: 1;
     margin-bottom: 4px;
@@ -119,6 +126,9 @@
     }
 
     &:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
       &::placeholder {
         color: rgb(54, 54, 54);
       }
