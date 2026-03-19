@@ -3,7 +3,7 @@
 // import api from "../helpers/api";
 import appStore from '../stores/appStore';
 import { getAllDailyNotes, getDailyNote } from 'obsidian-daily-notes-interface';
-import { App, TFile, moment, Moment } from 'obsidian';
+import { App, TFile, Moment } from 'obsidian';
 // import { Moment}  from "obsidian";
 
 class DailyNotesService {

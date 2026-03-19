@@ -269,8 +269,8 @@ export async function getMemosFromNote(allMemos: any[], commentMemos: any[]): Pr
       const line = list.values[j].line;
       let memoType = 'JOURNAL';
       let hasId;
-     // let realCreateDate = moment(createDate, 'YYYY-MM-DD HH:mm');
-      let realCreateDate = createDate.toFormat("yyyy-MM-dd HH:mm");
+      // let realCreateDate = moment(createDate, 'YYYY-MM-DD HH:mm');
+      let realCreateDate = createDate.toFormat('yyyy-MM-dd HH:mm');
       if (/\^\S{6}$/g.test(content)) {
         hasId = content.slice(-6);
         // originId = hasId;
