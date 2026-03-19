@@ -1,12 +1,21 @@
 import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-// import reactSvgPlugin from 'vite-plugin-react-svg';
-import svgr from '@honkhonk/vite-plugin-svgr';
+import tailwindcss from '@tailwindcss/vite';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
   return {
-    plugins: [react(), svgr({ keepEmittedAssets: true })],
+    plugins: [
+      react(),
+      tailwindcss(),
+      svgr({
+        // svgr options: https://react-svgr.com/docs/options/
+        svgrOptions: {
+          icon: true,
+        },
+      }),
+    ],
     build: {
       sourcemap: mode === 'development' ? 'inline' : false,
       minify: false,
@@ -23,9 +32,8 @@ export default defineConfig(({ mode }) => {
         },
         external: ['obsidian'],
       },
-      // Use root as the output dir
-      emptyOutDir: false,
-      outDir: '.',
+      emptyOutDir: true,
+      outDir: 'dist',
     },
   };
 });

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 // import Home from './pages/Home';
+import './tailwind.css';
 import './less/app.less';
 import Provider from './labs/Provider';
 import appContext from './stores/appContext';
