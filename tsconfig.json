@@ -14,7 +14,7 @@
     "importHelpers": true,
     "noEmit": true,
     "lib": ["dom", "esnext", "DOM.Iterable", "scripthost", "es2015"],
-    "types": [ "@honkhonk/vite-plugin-svgr/client" ]
+    "types": ["@honkhonk/vite-plugin-svgr/client"]
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }
