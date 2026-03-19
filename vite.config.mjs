@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => {
         svgrOptions: {
           icon: true,
         },
+        include: '**/*.svg?component',
+        // This ensures that when you import with ?component, it's a React component
+        // and default imports without suffix remain as strings/URLs
       }),
       viteStaticCopy({
         targets: [
