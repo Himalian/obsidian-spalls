@@ -43,6 +43,10 @@ const Sidebar: React.FC<Props> = () => {
     };
   }, []);
 
+  const handleOverlayClick = () => {
+    globalStateService.setShowSiderbarInMobileView(false);
+  };
+
   useEffect(() => {
     globalStateService.setShowSiderbarInMobileView(false);
   }, [locationState]);
@@ -64,12 +68,17 @@ const Sidebar: React.FC<Props> = () => {
   }, [isMobileView, showSiderbarInMobileView]);
 
   return (
-    <aside className="memos-sidebar-wrapper" ref={wrapperElRef}>
-      <UserBanner />
-      <UsageHeatMap />
-      <QueryList />
-      <TagList />
-    </aside>
+    <>
+      {isMobileView && (
+        <div className={`sidebar-overlay ${showSiderbarInMobileView ? 'show' : ''}`} onClick={handleOverlayClick}></div>
+      )}
+      <aside className="memos-sidebar-wrapper" ref={wrapperElRef}>
+        <UserBanner />
+        <UsageHeatMap />
+        <QueryList />
+        <TagList />
+      </aside>
+    </>
   );
 };
 
