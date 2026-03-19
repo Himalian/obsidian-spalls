@@ -5,7 +5,7 @@
   position: relative;
   width: 100%;
   height: auto;
-  background-color: white;
+  background-color: transparent;
 
   > .common-editor-inputer {
     display: inline-block;
@@ -71,8 +71,8 @@
       > .confirm-btn {
         cursor: pointer;
         padding: 0 12px;
-        background-color: @text-green;
-        color: white;
+        background-color: var(--interactive-accent);
+        color: var(--text-on-accent);
 
         &:disabled {
           cursor: not-allowed;
@@ -96,7 +96,7 @@
   position: relative;
   width: 100%;
   height: auto;
-  background-color: rgb(59, 59, 59);
+  background-color: transparent;
 
   > .common-editor-inputer {
     display: inline-block;
@@ -171,8 +171,8 @@
       > .confirm-btn {
         cursor: pointer;
         padding: 0 12px;
-        background-color: @text-dark-red;
-        color: white;
+        background-color: var(--interactive-accent);
+        color: var(--text-on-accent);
 
         &:disabled {
           cursor: not-allowed;

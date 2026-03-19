@@ -5,16 +5,16 @@
   .flex(column, flex-start, flex-start);
   width: 100%;
   padding: 12px 18px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-primary-alt);
   border-radius: 8px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid var(--background-modifier-border);
 
   // &:not(:first-child) {
   //   margin-top: 8px;
   // }
 
   &:hover {
-    border-color: @bg-gray;
+    border-color: var(--background-modifier-border-hover);
   }
 
   > .memo-top-wrapper {
@@ -261,9 +261,9 @@
   .flex(column, flex-start, flex-start);
   width: 100%;
   padding: 12px 18px;
-  background-color: #303030;
+  background-color: var(--background-primary-alt);
   border-radius: 8px;
-  border: 1px solid #4a4a4a;
+  border: 1px solid var(--background-modifier-border);
 
 
   // &:not(:first-child) {
@@ -271,7 +271,7 @@
   // }
 
   &:hover {
-    border-color: @bg-dark-gray;
+    border-color: var(--background-modifier-border-hover);
   }
 
   > .memo-top-wrapper {

@@ -5,11 +5,11 @@
   position: relative;
   width: 100%;
   height: auto;
-  background-color: white;
+  background-color: var(--background-primary);
   padding: 16px;
   // margin-bottom: 8px;
   border-radius: 8px;
-  border: 2px solid @bg-gray;
+  border: 1px solid var(--background-modifier-border);
 
   &.edit-ing {
     border-color: @text-blue;
@@ -27,7 +27,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    background-color: white;
+    background-color: transparent;
   }
 
   > .date-picker {
@@ -69,11 +69,11 @@
   position: relative;
   width: 100%;
   height: auto;
-  background-color: rgb(59, 59, 59);
+  background-color: var(--background-primary);
   padding: 16px;
   // margin-bottom: 8px;
   border-radius: 8px;
-  border: 2px solid @bg-dark-gray;
+  border: 1px solid var(--background-modifier-border);
 
   &.edit-ing {
     border-color: rgb(60, 60, 60);
@@ -91,7 +91,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    background-color: rgb(56, 56, 56);
+    background-color: transparent;
   }
 
   > .date-picker {
