@@ -24,17 +24,17 @@ dev:
 # 对所有包含路径的变量加双引号以处理空格
 link:
 	@mkdir -p "{{plugin_dir}}"
-	@ln -sf "$(pwd)/main.js" "{{plugin_dir}}/main.js"
+	@ln -sf "$(pwd)/dist/main.js" "{{plugin_dir}}/main.js"
 	@ln -sf "$(pwd)/manifest.json" "{{plugin_dir}}/manifest.json"
-	@ln -sf "$(pwd)/styles.css" "{{plugin_dir}}/styles.css"
+	@ln -sf "$(pwd)/dist/styles.css" "{{plugin_dir}}/styles.css"
 	@echo "Linked plugin to {{plugin_dir}}"
 
 # Manually copy build artifacts to Obsidian plugin directory
 install: build
 	@mkdir -p "{{plugin_dir}}"
-	@cp main.js manifest.json styles.css "{{plugin_dir}}"
+	@cp dist/main.js manifest.json dist/styles.css "{{plugin_dir}}"
 	@echo "Installed plugin to {{plugin_dir}}"
 
 # Clean build artifacts
 clean:
-	rm -f main.js styles.css
+	rm -rf dist
