@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-memos",
+  "name": "obsidian-memos-fork",
   "version": "1.9.7",
   "description": "A Quick Capture Plugin For Obsidian Daily Notes",
   "author": "boninall",
@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "dev": "bun run lint && vite build --watch --mode development",
-    "lint:fix": "bun run lint -- -- -- fix",
+    "lint:fix": "eslint . --ext .ts --fix",
     "prettier": "bunx prettier src test --check",
     "prettier:fix": "bun run prettier -- -- write",
     "format": "bun run prettier:fix && bun run lint:fix",
