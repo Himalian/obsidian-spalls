@@ -2,7 +2,6 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
@@ -19,14 +18,6 @@ export default defineConfig(({ mode }) => {
         // This ensures that when you import with ?component, it's a React component
         // and default imports without suffix remain as strings/URLs
       }),
-      viteStaticCopy({
-        targets: [
-          {
-            src: 'manifest.json',
-            dest: '.',
-          },
-        ],
-      }),
     ],
     build: {
       sourcemap: mode === 'development' ? 'inline' : false,
@@ -41,11 +32,11 @@ export default defineConfig(({ mode }) => {
           // Overwrite default Vite output fileName
           entryFileNames: 'main.js',
           assetFileNames: 'styles.css',
+          dir: '.',
         },
         external: ['obsidian'],
       },
-      emptyOutDir: true,
-      outDir: 'dist',
+      emptyOutDir: false,
     },
   };
 });

@@ -3,7 +3,7 @@
   "version": "1.9.7",
   "description": "A Quick Capture Plugin For Obsidian Daily Notes",
   "author": "boninall",
-  "main": "dist/main.js",
+  "main": "main.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "dev": "bun run lint && vite build --watch --mode development",
@@ -17,6 +17,7 @@
     "test:watch": "bun run test -- --watch"
   },
   "dependencies": {
+    "lucide-react": "^1.7.0",
     "obsidian": "0.16.3",
     "obsidian-daily-notes-interface": "^0.9.4",
     "react": "^17.0.2",
