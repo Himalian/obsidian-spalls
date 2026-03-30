@@ -1,10 +1,9 @@
-import type React from 'react';
+import React from 'react';
 import { useContext } from 'react';
 import { moment } from 'obsidian';
 import appContext from '../stores/appContext';
 import { locationService } from '../services';
 import { memoSpecialTypes } from '../helpers/filter';
-import '../less/search-bar.less';
 import Search from '../icons/search.svg?component';
 // import { Search } from 'lucide-react';
 import { t } from '../translations/helper';
@@ -86,7 +85,7 @@ const SearchBar: React.FC<Props> = () => {
     // <div className={`${isSearchBarShown ? "search-bar-container-long" : "search-bar-container-short"}`}>
     //   <div className={`${isSearchBarShown ? "search-bar-inputer-long" : "search-bar-inputer-short"}`}>
     <div
-      className="search-bar-container h-8 text-sm w-auto flex flex-row justify-self-start
+      className="h-8 text-sm w-auto flex flex-row justify-self-start
       items-center bg-transparent p-1"
     >
       <Search className="shrink-0 w-4 h-4 opacity-60"></Search>
