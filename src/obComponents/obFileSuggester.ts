@@ -1,5 +1,5 @@
 // Credits go to Liam's Periodic Notes Plugin: https://github.com/liamcain/obsidian-periodic-notes
-import { TAbstractFile, TFile } from 'obsidian';
+import { type TAbstractFile, TFile } from 'obsidian';
 import dailyNotesService from '../services/dailyNotesService';
 
 export const getSuggestions = (inputStr: string) => {

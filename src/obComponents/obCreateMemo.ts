@@ -144,7 +144,7 @@ export async function waitForInsert(MemoContent: string, isTASK: boolean, insert
 export async function insertAfterHandler(targetString: string, formatted: string, fileContent: string) {
   // const targetString: string = plugin.settings.InsertAfter;
   //eslint-disable-next-line
-  const targetRegex = new RegExp(`\s*${await escapeRegExp(targetString)}\s*`);
+  const targetRegex = new RegExp(`s*${await escapeRegExp(targetString)}s*`);
   const fileContentLines: string[] = getLinesInString(fileContent);
 
   const targetPosition = fileContentLines.findIndex((line) => targetRegex.test(line));

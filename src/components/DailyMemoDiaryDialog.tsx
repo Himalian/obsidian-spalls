@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { memoService } from '../services';
 import toImage from '../labs/html2image';
 import useToggle from '../hooks/useToggle';

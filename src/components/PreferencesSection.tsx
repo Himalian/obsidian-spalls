@@ -4,11 +4,11 @@ import { globalStateService, memoService } from '../services';
 import { parseHtmlToRawText } from '../helpers/marked';
 import { formatMemoContent } from './Memo';
 import '../less/preferences-section.less';
-import React from 'react';
+import type React from 'react';
 import checkboxActive from '../icons/checkbox-active.svg';
 import checkbox from '../icons/checkbox.svg';
 
-interface Props {}
+type Props = {};
 
 const PreferencesSection: React.FC<Props> = () => {
   const { globalState } = useContext(appContext);

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import { userService } from "../services";
 import toImage from '../labs/html2image';
 import {
@@ -13,7 +14,7 @@ import { showDialog } from './Dialog';
 import { formatMemoContent } from './Memo';
 import Only from './common/OnlyWhen';
 import '../less/share-memo-image-dialog.less';
-import { moment, Notice, Platform, TFile, Vault } from 'obsidian';
+import { moment, Notice, Platform, TFile, type Vault } from 'obsidian';
 import appStore from '../stores/appStore';
 import {
   AutoSaveWhenOnMobile,

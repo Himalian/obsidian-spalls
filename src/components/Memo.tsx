@@ -1,5 +1,6 @@
 import { moment, Notice, Platform } from 'obsidian';
-import React, { memo, useCallback, useContext, useMemo, useRef } from 'react';
+import type React from 'react';
+import { memo, useCallback, useContext, useMemo, useRef } from 'react';
 import useState from 'react-usestateref';
 import {
   FIRST_TAG_REG,
@@ -280,7 +281,6 @@ export function formatMemoContent(content: string, memoid?: string) {
     if (c.tagName === 'P' && c.textContent === '' && c.firstElementChild?.tagName !== 'BR') {
       c.remove();
       i--;
-      continue;
     }
   }
 

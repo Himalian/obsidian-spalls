@@ -4,7 +4,8 @@ import Provider from '../labs/Provider';
 import appStore from '../stores/appStore';
 import { ANIMATION_DURATION } from '../helpers/consts';
 import '../less/dialog.less';
-import React, { KeyboardEvent, useRef } from 'react';
+import type React from 'react';
+import { KeyboardEvent, useRef } from 'react';
 
 interface DialogConfig {
   className: string;

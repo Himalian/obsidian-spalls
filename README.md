@@ -9,7 +9,7 @@
 
 > [!note]
 > Thino(Memos 2.1.x) is ready for test, if you are interested in it, please contact me @Boninall via Obsidian discord OR mail: Bonopengate@gmail.com
-> 
+>
 > Thino(Memos 2.1.x) 正在封闭测试中，如果你对此感兴趣，请在 Obsidian discord 上联系我 @Boninall 或者邮件：Bonopengate@gmail.com
 >
 > Releases Note: https://ob.boninall.com/_Update/Obsidian+Memos+Update+MOC
@@ -32,7 +32,7 @@ A new way for you to quick capture an idea in Obsidian. Which is highly based on
 1. First you ensure you have the 'Daily notes' plugin (the core plugin of Obsidian) enabled.
 2. Then, you should check the setting to set your header to process below and insert new memos below, OR leave blank to write the entries to the bottom of the daily file.
 3. Open memos and then click on 'NOTEIT'.
-4. If you allow comments one Memos, you need to ensure you have the 'dataview' plugin  enabled
+4. If you allow comments one Memos, you need to ensure you have the 'dataview' plugin enabled
 
 A entry will be added to your daily note using a bullet format with the current time.
 
@@ -59,23 +59,23 @@ You can share any memo and daily memo through image.
 
 ### Tag list
 
-Build in tag list for JUST memos. The build in tag list will show the tags in your memos. 
+Build in tag list for JUST memos. The build in tag list will show the tags in your memos.
 
 ### Query list
 
-You can set queries that contains more than one variable to query memos. You can add it\pin it\Delete it. 
+You can set queries that contains more than one variable to query memos. You can add it\pin it\Delete it.
 
 ### Memos Heatmap
 
 You have a github heatmap like view to see your memos amount everyday, like dots in calendar. But all of them is clickable to filter that day's memos.
 
-### User banner 
+### User banner
 
 You can set your name in setting ,so don't forget to do it. And you can find the setting and trash box for memos when you click on the three dots near the user name.
 
 In each memo, you can used MARK to make it link to another memo. And you can delete it, share it and so on.
 
-TIPS: 
+TIPS:
 
 1. you can double click on the memo to edit the memo.
 2. Ctrl+click to jump to the source of the memo.
@@ -104,7 +104,7 @@ You can download css snippet here: [Heatmap-color](./document/Heatmap-css-snippe
 
 ### Download Manually
 
-🚚: Download the latest release. Extract and put the three files (main.js, manifest.json, styles.css) to folder `{{obsidian_vault}}/.obsidian/plugins/Obsidian-Memos`. 
+🚚: Download the latest release. Extract and put the three files (main.js, manifest.json, styles.css) to folder `{{obsidian_vault}}/.obsidian/plugins/Obsidian-Memos`.
 
 ## Say Thank You
 

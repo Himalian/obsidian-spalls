@@ -1,4 +1,4 @@
-import { debounce, HoverPopover, ItemView, Platform, TFile, WorkspaceLeaf } from 'obsidian';
+import { debounce, type HoverPopover, ItemView, Platform, type TFile, type WorkspaceLeaf } from 'obsidian';
 import { MEMOS_VIEW_TYPE } from './constants';
 import React from 'react';
 import ReactDOM from 'react-dom';

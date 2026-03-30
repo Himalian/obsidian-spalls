@@ -1,4 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import type React from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import appContext from '../stores/appContext';
 import useLoading from '../hooks/useLoading';
 import { globalStateService, locationService, memoService, queryService } from '../services';
@@ -13,7 +14,7 @@ import MenuSvg from '../icons/menu.svg?component';
 import { Notice } from 'obsidian';
 import { t } from '../translations/helper';
 
-interface Props {}
+type Props = {};
 
 const MemoTrash: React.FC<Props> = () => {
   const {

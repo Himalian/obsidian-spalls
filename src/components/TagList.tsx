@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import type React from 'react';
+import { useContext, useEffect, useState } from 'react';
 import appContext from '../stores/appContext';
 import { locationService, memoService } from '../services';
 import useToggle from '../hooks/useToggle';
@@ -15,7 +16,7 @@ interface Tag {
   subTags: Tag[];
 }
 
-interface Props {}
+type Props = {};
 
 const TagList: React.FC<Props> = () => {
   const {

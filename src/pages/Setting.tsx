@@ -1,4 +1,5 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import type React from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import appContext from '../stores/appContext';
 import { globalStateService, memoService } from '../services';
 import PreferencesSection from '../components/PreferencesSection';
@@ -8,7 +9,7 @@ import MenuSvg from '../icons/menu.svg?component';
 
 // import MenuSvg from "*.svg?component";
 
-interface Props {}
+type Props = {};
 
 const Setting: React.FC<Props> = () => {
   const {

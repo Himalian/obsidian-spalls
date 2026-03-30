@@ -1,5 +1,5 @@
-import { TFile, Vault } from 'obsidian';
-import React from 'react';
+import type { TFile, Vault } from 'obsidian';
+import type React from 'react';
 import { IMAGE_URL_REG, MARKDOWN_URL_REG, MARKDOWN_WEB_URL_REG, WIKI_IMAGE_URL_REG } from '../helpers/consts';
 import appStore from '../stores/appStore';
 import Only from './common/OnlyWhen';

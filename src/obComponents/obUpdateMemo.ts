@@ -1,4 +1,4 @@
-import { moment, TFile } from 'obsidian';
+import { moment, type TFile } from 'obsidian';
 import { getDailyNote } from 'obsidian-daily-notes-interface';
 // import appStore from "../stores/appStore";
 import dailyNotesService from '../services/dailyNotesService';

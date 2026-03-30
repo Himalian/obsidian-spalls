@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Store } from './createStore';
+import type { Store } from './createStore';
 
 interface Props {
   children: React.ReactElement;

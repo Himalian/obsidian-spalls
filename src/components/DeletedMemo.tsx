@@ -3,7 +3,7 @@ import useToggle from '../hooks/useToggle';
 import { memoService } from '../services';
 import { formatMemoContent } from './Memo';
 import '../less/memo.less';
-import React from 'react';
+import type React from 'react';
 import { Notice } from 'obsidian';
 import More from '../icons/more.svg?component';
 import { t } from '../translations/helper';

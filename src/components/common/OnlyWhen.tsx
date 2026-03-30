@@ -1,5 +1,5 @@
-import React from 'react';
-import { ReactNode } from 'react';
+import type React from 'react';
+import type { ReactNode } from 'react';
 
 interface OnlyWhenProps {
   children: ReactNode;

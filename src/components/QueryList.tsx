@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import type React from 'react';
+import { useContext, useEffect } from 'react';
 import appContext from '../stores/appContext';
 import useToggle from '../hooks/useToggle';
 import useLoading from '../hooks/useLoading';
@@ -12,7 +13,7 @@ import MoreWhite from '../icons/more-white.svg?component';
 import { Notice } from 'obsidian';
 import { t } from '../translations/helper';
 
-interface Props {}
+type Props = {};
 
 const QueryList: React.FC<Props> = () => {
   const {

@@ -1,4 +1,5 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import type React from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import useState from 'react-usestateref';
 import appContext from '../stores/appContext';
 import { dailyNotesService, globalStateService, locationService } from '../services';
@@ -34,7 +35,7 @@ interface DailyUsageStat {
 //   begin: string;
 // }
 
-interface Props {}
+type Props = {};
 
 // let FromTo: string = '';
 
@@ -229,12 +230,12 @@ const UsageHeatMap: React.FC<Props> = () => {
             count <= 0
               ? ''
               : count <= 1
-              ? 'stat-day-L1-bg'
-              : count <= 2
-              ? 'stat-day-L2-bg'
-              : count <= 4
-              ? 'stat-day-L3-bg'
-              : 'stat-day-L4-bg';
+                ? 'stat-day-L1-bg'
+                : count <= 2
+                  ? 'stat-day-L2-bg'
+                  : count <= 4
+                    ? 'stat-day-L3-bg'
+                    : 'stat-day-L4-bg';
 
           return (
             <span

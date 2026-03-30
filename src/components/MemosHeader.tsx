@@ -1,4 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import type React from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import appContext from '../stores/appContext';
 import SearchBar from './SearchBar';
 import { globalStateService, memoService, queryService } from '../services';
@@ -6,7 +7,7 @@ import Only from './common/OnlyWhen';
 import '../less/memos-header.less';
 import MenuSvg from '../icons/menu.svg?component';
 
-interface Props {}
+type Props = {};
 
 const MemosHeader: React.FC<Props> = () => {
   const {

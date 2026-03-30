@@ -1,4 +1,5 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import appContext from '../stores/appContext';
 import { locationService, memoService, queryService } from '../services';
 import { FIRST_TAG_REG, IMAGE_URL_REG, LINK_REG, MEMO_LINK_REG, NOP_FIRST_TAG_REG, TAG_REG } from '../helpers/consts';
@@ -16,7 +17,7 @@ import { t } from '../translations/helper';
 
 // import { DefaultEditorLocation } from '../memos';
 
-interface Props {}
+type Props = {};
 
 export let copyShownMemos: Model.Memo[];
 
@@ -193,10 +194,10 @@ const MemoList: React.FC<Props> = () => {
           {isFetching
             ? t('Fetching data...')
             : shownMemos.length === 0
-            ? t('Noooop!')
-            : showMemoFilter
-            ? ''
-            : t('All Data is Loaded 🎉')}
+              ? t('Noooop!')
+              : showMemoFilter
+                ? ''
+                : t('All Data is Loaded 🎉')}
         </p>
       </div>
     </div>

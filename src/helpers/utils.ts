@@ -1,4 +1,4 @@
-import { moment, Notice, TFile } from 'obsidian';
+import { moment, Notice, type TFile } from 'obsidian';
 import { createDailyNote, getDailyNoteSettings } from 'obsidian-daily-notes-interface';
 import { t } from '../translations/helper';
 import { UseDailyOrPeriodic } from '../memos';
@@ -131,7 +131,7 @@ namespace utils {
 
     console.log('hi');
 
-    _debounce.cancel = function () {
+    _debounce.cancel = () => {
       if (timer) clearTimeout(timer);
       timer = null;
       isInvoke = false;

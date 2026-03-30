@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import type React from 'react';
+import { useContext } from 'react';
 import { moment } from 'obsidian';
 import appContext from '../stores/appContext';
 import { locationService } from '../services';
@@ -11,7 +12,7 @@ import useToggle from '../hooks/useToggle';
 
 // import useToggle from "../hooks/useToggle";
 
-interface Props {}
+type Props = {};
 
 export let searchBoxInput: HTMLInputElement;
 // let isSearchBar = false as boolean;

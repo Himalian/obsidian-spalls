@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { MEMO_LINK_REG } from '../helpers/consts';
 import utils from '../helpers/utils';
 import { globalStateService, memoService } from '../services';

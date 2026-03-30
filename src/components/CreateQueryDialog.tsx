@@ -1,4 +1,5 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import type React from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { memoService, queryService } from '../services';
 import { checkShouldShowMemoWithFilters, filterConsts, getDefaultFilter, relationConsts } from '../helpers/filter';
 import useLoading from '../hooks/useLoading';

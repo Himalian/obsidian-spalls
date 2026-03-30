@@ -1,6 +1,6 @@
 import showPreviewImageDialog from './PreviewImageDialog';
 import '../less/image.less';
-import React from 'react';
+import type React from 'react';
 
 interface Props {
   imgUrl: string;

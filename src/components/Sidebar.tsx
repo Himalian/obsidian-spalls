@@ -7,9 +7,9 @@ import QueryList from './QueryList';
 import TagList from './TagList';
 import UsageHeatMap from './UsageHeatMap';
 import '../less/siderbar.less';
-import React from 'react';
+import type React from 'react';
 
-interface Props {}
+type Props = {};
 
 const Sidebar: React.FC<Props> = () => {
   const {

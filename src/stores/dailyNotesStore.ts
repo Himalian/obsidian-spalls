@@ -1,4 +1,4 @@
-import { App, TFile } from 'obsidian';
+import type { App, TFile } from 'obsidian';
 import { getAllDailyNotes } from 'obsidian-daily-notes-interface';
 
 export interface State {

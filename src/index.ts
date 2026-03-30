@@ -1,8 +1,8 @@
-import { Notice, Platform, Plugin, TFile } from 'obsidian';
+import { Notice, Platform, Plugin, type TFile } from 'obsidian';
 import { FocusOnEditor, Memos, OpenDailyMemosWithMemos } from './memos';
 import { MEMOS_VIEW_TYPE } from './constants';
 import addIcons from './obComponents/customIcons';
-import { DEFAULT_SETTINGS, MemosSettings, MemosSettingTab } from './setting';
+import { DEFAULT_SETTINGS, type MemosSettings, MemosSettingTab } from './setting';
 import showDailyMemoDiaryDialog from './components/DailyMemoDiaryDialog';
 import { t } from './translations/helper';
 import { memoService } from './services';

@@ -1,4 +1,5 @@
-import React, { useCallback, useContext, useState } from 'react';
+import type React from 'react';
+import { useCallback, useContext, useState } from 'react';
 import appContext from '../stores/appContext';
 import { locationService } from '../services';
 import utils from '../helpers/utils';
@@ -9,7 +10,7 @@ import { UserName } from '../memos';
 import More from '../icons/more.svg?component';
 import { t } from '../translations/helper';
 
-interface Props {}
+type Props = {};
 
 const UserBanner: React.FC<Props> = () => {
   const {

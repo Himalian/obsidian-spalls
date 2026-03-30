@@ -1,6 +1,6 @@
 import { storage } from '../helpers/storage';
 import appStore from '../stores/appStore';
-import { AppSetting } from '../stores/globalStateStore';
+import type { AppSetting } from '../stores/globalStateStore';
 
 class GlobalStateService {
   constructor() {

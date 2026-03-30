@@ -1,4 +1,4 @@
-import { Action, Reducer, State } from './createStore';
+import type { Action, Reducer, State } from './createStore';
 
 interface ReducersMapObject<S extends State = any, A extends Action = any> {
   [key: string]: Reducer<S, A>;

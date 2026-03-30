@@ -16,7 +16,7 @@
     "lib": ["dom", "esnext", "DOM.Iterable", "scripthost", "es2015"],
     "types": ["@honkhonk/vite-plugin-svgr/client"],
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": true
   },
   "include": ["**/*.ts", "**/*.tsx", "src/data"]
 }

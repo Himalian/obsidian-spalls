@@ -1,9 +1,10 @@
-import React, { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import type React from 'react';
+import { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 import appContext from '../stores/appContext';
 import { dailyNotesService, globalStateService, locationService, memoService, resourceService } from '../services';
 import utils from '../helpers/utils';
 import { storage } from '../helpers/storage';
-import Editor, { EditorRefActions } from './Editor/Editor';
+import Editor, { type EditorRefActions } from './Editor/Editor';
 import '../less/memo-editor.less';
 import '../less/select-date-picker.less';
 import Tag from '../icons/tag.svg?component';
@@ -60,7 +61,7 @@ const getCursorPostion = (input: HTMLTextAreaElement) => {
   };
 };
 
-interface Props {}
+type Props = {};
 
 let isList: boolean;
 let isEditor = false as boolean;
@@ -171,7 +172,7 @@ const MemoEditor: React.FC<Props> = () => {
       divThis.style.top = buttonTop + 'px';
       divThis.style.left = buttonLeft + 'px';
 
-      divThis.onclick = function () {
+      divThis.onclick = () => {
         const scaleElementAni = divThis.animate(
           [
             // keyframes
@@ -204,7 +205,7 @@ const MemoEditor: React.FC<Props> = () => {
       leafView.querySelector('.content-wrapper').prepend(divThis);
 
       const memolistScroll = leafView.querySelector('.memolist-wrapper') as HTMLElement;
-      memolistScroll.onscroll = function () {
+      memolistScroll.onscroll = () => {
         if (isEditor && !isEditorGo) {
           isEditorGo = true;
           const scaleEditorElementAni = memoEditorDiv.animate(

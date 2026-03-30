@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import type React from 'react';
+import { useContext } from 'react';
 import appContext from '../stores/appContext';
 import { locationService, queryService } from '../services';
 import utils from '../helpers/utils';
@@ -10,7 +11,7 @@ import { copyShownMemos } from './MemoList';
 import { getMemosByDate, transferMemosIntoText } from '../obComponents/obCopyMemos';
 import { t } from '../translations/helper';
 
-interface FilterProps {}
+type FilterProps = {};
 
 const MemoFilter: React.FC<FilterProps> = () => {
   const {
