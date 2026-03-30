@@ -7,12 +7,18 @@ import showDailyMemoDiaryDialog from './components/DailyMemoDiaryDialog';
 import { t } from './translations/helper';
 import { memoService } from './services';
 
+import { dataManager } from './data/DataManager';
+import { DailyNoteDataSource } from './data/DailyNoteDataSource';
+
 export default class MemosPlugin extends Plugin {
   public settings: MemosSettings;
 
   async onload(): Promise<void> {
     console.log('obsidian-memos loading...');
     await this.loadSettings();
+
+    // Initialize DataManager with DailyNoteDataSource
+    dataManager.setDataSource(new DailyNoteDataSource(this));
 
     this.registerView(MEMOS_VIEW_TYPE, (leaf) => new Memos(leaf, this));
 

@@ -15,6 +15,7 @@ export interface MemosSettings {
   ShareFooterStart: string;
   ShareFooterEnd: string;
   UseDailyOrPeriodic: string;
+  /** @deprecated No longer used as the format is unified to standard Markdown list */
   DefaultPrefix: string;
   InsertDateFormat: string;
   DefaultEditorLocation: string;
@@ -33,6 +34,7 @@ export interface MemosSettings {
   UseVaultTags: boolean;
   DefaultLightBackgroundImage: string;
   DefaultDarkBackgroundImage: string;
+  /** @deprecated No longer used as the format is unified to standard Markdown list */
   DefaultMemoComposition: string;
   ShowTaskLabel: boolean;
   CommentOnMemos: boolean;
@@ -73,7 +75,7 @@ export const DEFAULT_SETTINGS: MemosSettings = {
   UseVaultTags: false,
   DefaultLightBackgroundImage: '',
   DefaultDarkBackgroundImage: '',
-  DefaultMemoComposition: '{TIME} {CONTENT}',
+  DefaultMemoComposition: '- {TIME} {CONTENT}',
   CommentOnMemos: false,
   CommentsInOriginalNotes: false,
   FetchMemosMark: '#memo',
@@ -295,18 +297,18 @@ export class MemosSettingTab extends PluginSettingTab {
     //     });
     //   });
 
-    new Setting(containerEl)
-      .setName(t('Default prefix'))
-      .setDesc(t("Set the default prefix when create memo, 'List' by default."))
-      .addDropdown(async (d: DropdownComponent) => {
-        dropdown = d;
-        dropdown.addOption('List', t('List'));
-        dropdown.addOption('Task', t('Task'));
-        dropdown.setValue(this.plugin.settings.DefaultPrefix).onChange(async (value) => {
-          this.plugin.settings.DefaultPrefix = value;
-          this.applySettingsUpdate();
-        });
-      });
+    // new Setting(containerEl)
+    //   .setName(t('Default prefix'))
+    //   .setDesc(t("Set the default prefix when create memo, 'List' by default."))
+    //   .addDropdown(async (d: DropdownComponent) => {
+    //     dropdown = d;
+    //     dropdown.addOption('List', t('List'));
+    //     dropdown.addOption('Task', t('Task'));
+    //     dropdown.setValue(this.plugin.settings.DefaultPrefix).onChange(async (value) => {
+    //       this.plugin.settings.DefaultPrefix = value;
+    //       this.applySettingsUpdate();
+    //     });
+    //   });
 
     new Setting(containerEl)
       .setName(t('Default insert date format'))
@@ -489,22 +491,22 @@ export class MemosSettingTab extends PluginSettingTab {
         });
       });
 
-    new Setting(containerEl)
-      .setName(t('Default Memo Composition'))
-      .setDesc(
-        t(
-          'Set default memo composition, you should use {TIME} as "HH:mm" and {CONTENT} as content. "{TIME} {CONTENT}" by default',
-        ),
-      )
-      .addText((text) =>
-        text
-          .setPlaceholder(DEFAULT_SETTINGS.DefaultMemoComposition)
-          .setValue(this.plugin.settings.DefaultMemoComposition)
-          .onChange(async (value) => {
-            this.plugin.settings.DefaultMemoComposition = value;
-            this.applySettingsUpdate();
-          }),
-      );
+    // new Setting(containerEl)
+    //   .setName(t('Default Memo Composition'))
+    //   .setDesc(
+    //     t(
+    //       'Set default memo composition, you should use {TIME} as "HH:mm" and {CONTENT} as content. "{TIME} {CONTENT}" by default',
+    //     ),
+    //   )
+    //   .addText((text) =>
+    //     text
+    //       .setPlaceholder(DEFAULT_SETTINGS.DefaultMemoComposition)
+    //       .setValue(this.plugin.settings.DefaultMemoComposition)
+    //       .onChange(async (value) => {
+    //         this.plugin.settings.DefaultMemoComposition = value;
+    //         this.applySettingsUpdate();
+    //       }),
+    //   );
 
     new Setting(containerEl)
       .setName(t('Allow Comments On Memos'))

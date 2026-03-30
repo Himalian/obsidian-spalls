@@ -181,6 +181,7 @@ export let UserName: string;
 export let ProcessEntriesBelow: string;
 export let SaveMemoButtonLabel: string;
 export let SaveMemoButtonIcon: string;
+/** @deprecated */
 export let DefaultPrefix: string;
 export let InsertDateFormat: string;
 export let DefaultEditorLocation: string;
@@ -201,6 +202,7 @@ export let DeleteFileName: string;
 export let UseVaultTags: boolean;
 export let DefaultDarkBackgroundImage: string;
 export let DefaultLightBackgroundImage: string;
+/** @deprecated */
 export let DefaultMemoComposition: string;
 export let ShowTaskLabel: boolean;
 export let CommentOnMemos: boolean;
