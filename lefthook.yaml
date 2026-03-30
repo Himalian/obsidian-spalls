@@ -1,0 +1,7 @@
+pre-commit:
+  commands:
+    lint:
+      run: bun run lint:fix
+      glob: '*.rb'
+    format:
+      run: bun run format
