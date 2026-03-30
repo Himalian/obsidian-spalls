@@ -1,5 +1,5 @@
 import { moment } from 'obsidian';
-import { AddBlankLineWhenDate, CommentOnMemos, DefaultMemoComposition, ShowDate, ShowTime } from '../memos';
+import { AddBlankLineWhenDate, DefaultMemoComposition, ShowDate, ShowTime } from '../memos';
 import { memoService } from '../services';
 import utils, { getDailyNoteFormat } from '../helpers/utils';
 
@@ -24,18 +24,6 @@ export const getMemosByDate = (memos: Model.Memo[]) => {
   });
 
   return dataArr;
-};
-
-export const getCommentMemos = (memos: Model.Memo) => {
-  return memoService
-    .getState()
-    .commentMemos.filter((m) => m.linkId === memos.hasId)
-    .sort((a, b) => utils.getTimeStampByDate(a.createdAt) - utils.getTimeStampByDate(b.createdAt))
-    .map((m) => ({
-      ...m,
-      createdAtStr: utils.getDateTimeString(m.createdAt),
-      dateStr: utils.getDateString(m.createdAt),
-    }));
 };
 
 export const transferMemosIntoText = (memosArray: Array<any>): string => {
@@ -75,34 +63,6 @@ export const transferMemosIntoText = (memosArray: Array<any>): string => {
           }
         }
         outputText = outputText.replace(/ \^\S{6}/g, '');
-        if (CommentOnMemos) {
-          if (dataArr[i].hasId !== undefined) {
-            const commentMemos = getCommentMemos(dataArr[i]);
-            if (commentMemos.length > 0) {
-              commentMemos.map((cm) => {
-                let memoType = '- ';
-                // console.log(cm.memoType);
-                if (cm.memoType === 'TASK-TODO') {
-                  memoType = '- [ ] ';
-                } else if (cm.memoType === 'TASK-DONE') {
-                  memoType = '- [x] ';
-                } else if (cm.memoType.match(/TASK-(.*)?/g)) {
-                  memoType = '- [' + cm.memoType.match(/TASK-(.*)?/g)[1] + '] ';
-                }
-                outputText =
-                  outputText +
-                  indent +
-                  (ShowDate
-                    ? '    ' + memoType + '[[' + moment(cm.createdAt).format(dailyNotesformat) + ']] '
-                    : '    ' + memoType) +
-                  moment(cm.createdAt).format('HH:mm') +
-                  ' ' +
-                  cm.content.replace(/comment:(.*)$/g, '').replace(/^\d{14}/g, '') +
-                  '\n';
-              });
-            }
-          }
-        }
       }
     } else {
       for (let i = 0; i < dataArr.length; i++) {
@@ -119,33 +79,9 @@ export const transferMemosIntoText = (memosArray: Array<any>): string => {
           }
         }
         outputText = outputText.replace(/ \^\S{6}/g, '');
-        if (CommentOnMemos) {
-          if (dataArr[i].hasId !== undefined) {
-            const commentMemos = getCommentMemos(dataArr[i]);
-            if (commentMemos.length > 0) {
-              commentMemos.map((cm) => {
-                let memoType = '- ';
-                if (cm.memoType === 'TASK-TODO') {
-                  memoType = '- [ ] ';
-                } else if (cm.memoType === 'TASK-DONE') {
-                  memoType = '- [x] ';
-                } else if (cm.memoType.match(/TASK-(.*)?/g)) {
-                  memoType = '- [' + cm.memoType.match(/TASK-(.*)?/g)[1] + '] ';
-                }
-                outputText =
-                  outputText +
-                  indent +
-                  '    ' +
-                  memoType +
-                  cm.content.replace(/comment:(.*)$/g, '').replace(/^\d{14}/g, '') +
-                  '\n';
-              });
-            }
-          }
-        }
       }
     }
-    if (ShowDate && AddBlankLineWhenDate && !CommentOnMemos) {
+    if (ShowDate && AddBlankLineWhenDate) {
       outputText = outputText + '\n';
     }
   });

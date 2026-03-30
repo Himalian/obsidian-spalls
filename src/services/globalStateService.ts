@@ -33,15 +33,6 @@ class GlobalStateService {
     });
   };
 
-  public setCommentMemoId = (commentMemoId: string) => {
-    appStore.dispatch({
-      type: 'SET_COMMENT_MEMO_ID',
-      payload: {
-        commentMemoId,
-      },
-    });
-  };
-
   public setMarkMemoId = (markMemoId: string) => {
     appStore.dispatch({
       type: 'SET_MARK_MEMO_ID',

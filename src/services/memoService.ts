@@ -17,23 +17,13 @@ class MemoService {
   public async fetchAllMemos() {
     const data = await dataManager.getMemos();
     const memos = [] as any[];
-    const commentMemos = [] as any[];
     for (const m of data.memos) {
       memos.push(m);
-    }
-    for (const m of data.commentMemos) {
-      commentMemos.push(m);
     }
     appStore.dispatch({
       type: 'SET_MEMOS',
       payload: {
         memos,
-      },
-    });
-    appStore.dispatch({
-      type: 'SET_COMMENT_MEMOS',
-      payload: {
-        commentMemos,
       },
     });
 
@@ -102,29 +92,8 @@ class MemoService {
     });
   }
 
-  public pushCommentMemo(memo: Model.Memo) {
-    appStore.dispatch({
-      type: 'INSERT_COMMENT_MEMO',
-      payload: {
-        memo: {
-          ...memo,
-        },
-      },
-    });
-  }
-
   public getMemoById(id: string) {
     for (const m of this.getState().memos) {
-      if (m.id === id) {
-        return m;
-      }
-    }
-
-    return null;
-  }
-
-  public getCommentMemoById(id: string) {
-    for (const m of this.getState().commentMemos) {
       if (m.id === id) {
         return m;
       }
@@ -149,20 +118,11 @@ class MemoService {
     // memoService.fetchAllMemos();
   }
 
-  public async deleteMemoById(id: string) {
-    await api.deleteMemo(id);
-  }
+
 
   public editMemo(memo: Model.Memo) {
     appStore.dispatch({
       type: 'EDIT_MEMO',
-      payload: memo,
-    });
-  }
-
-  public editCommentMemo(memo: Model.Memo) {
-    appStore.dispatch({
-      type: 'EDIT_COMMENT_MEMO',
       payload: memo,
     });
   }
@@ -219,30 +179,8 @@ class MemoService {
     return memos.filter((m) => m.content.includes(memoId));
   }
 
-  public async getCommentMemos(memoId: string): Promise<Model.Memo[]> {
-    const { memos } = this.getState();
-    return memos.filter((m) => m.content.includes('comment: ' + memoId));
-  }
-
   public async createMemo(text: string, isTASK: boolean): Promise<Model.Memo> {
     const memo = await dataManager.createMemo(text, isTASK);
-    return memo;
-  }
-
-  public async createCommentMemo(
-    text: string,
-    isList: boolean,
-    path: string,
-    ID: string,
-    hasID: string,
-  ): Promise<Model.Memo> {
-    // dataManager should ideally handle comments too, but for now we might still need some old components
-    // if they haven't been refactored.
-    // However, the goal is to refactor them.
-    // For now, I'll keep it or move it to DailyNoteDataSource if it's related to daily notes.
-    // But since it's a "Comprehensive Refactoring", I'll use dataManager.
-    // Let's assume createMemo can handle it or add a specific method.
-    const memo = await dataManager.createMemo(text, isList); // Simplified for now
     return memo;
   }
 

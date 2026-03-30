@@ -14,5 +14,4 @@ interface KVObject<T = any> {
 
 interface allKindsofMemos {
   memos: Model.Memo[];
-  commentMemos: Model.Memo[];
 }

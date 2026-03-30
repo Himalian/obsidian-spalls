@@ -8,7 +8,6 @@ export interface AppSetting {
 export interface State extends AppSetting {
   markMemoId: string;
   editMemoId: string;
-  commentMemoId: string;
   isMobileView: boolean;
   showSiderbarInMobileView: boolean;
   changedByMemos: boolean;
@@ -25,13 +24,6 @@ interface SetEditMemoIdAction {
   type: 'SET_EDIT_MEMO_ID';
   payload: {
     editMemoId: string;
-  };
-}
-
-interface SetCommentMemoIdAction {
-  type: 'SET_COMMENT_MEMO_ID';
-  payload: {
-    commentMemoId: string;
   };
 }
 
@@ -65,7 +57,6 @@ export type Actions =
   | SetMobileViewAction
   | SetShowSidebarAction
   | SetEditMemoIdAction
-  | SetCommentMemoIdAction
   | SetMarkMemoIdAction
   | SetChangedByMemosAction
   | SetAppSettingAction;
@@ -90,16 +81,6 @@ export function reducer(state: State, action: Actions) {
       return {
         ...state,
         editMemoId: action.payload.editMemoId,
-      };
-    }
-    case 'SET_COMMENT_MEMO_ID': {
-      if (action.payload.commentMemoId === state.commentMemoId) {
-        return state;
-      }
-
-      return {
-        ...state,
-        commentMemoId: action.payload.commentMemoId,
       };
     }
     case 'SET_MOBILE_VIEW': {
@@ -147,7 +128,6 @@ export function reducer(state: State, action: Actions) {
 export const defaultState: State = {
   markMemoId: '',
   editMemoId: '',
-  commentMemoId: '',
   shouldSplitMemoWord: true,
   shouldHideImageUrl: true,
   shouldUseMarkdownParser: true,

@@ -18,10 +18,9 @@ export class DailyNoteDataSource implements IDataSource {
     };
   }
 
-  async getMemos(): Promise<{ memos: Model.Memo[]; commentMemos: Model.Memo[] }> {
+  async getMemos(): Promise<{ memos: Model.Memo[] }> {
     const dailyNotes = getAllDailyNotes();
     const allMemos: Model.Memo[] = [];
-    const commentMemos: Model.Memo[] = [];
 
     const options = this.getOptions();
 
@@ -40,7 +39,7 @@ export class DailyNoteDataSource implements IDataSource {
       });
     }
 
-    return { memos: allMemos, commentMemos };
+    return { memos: allMemos };
   }
 
   async createMemo(content: string, isTask: boolean, date?: any): Promise<Model.Memo> {
