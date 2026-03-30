@@ -4,7 +4,7 @@ export interface IDataSource {
   /**
    * 获取所有 Memos 及评论
    */
-  getMemos(): Promise<{ memos: Model.Memo[]; commentMemos: Model.Memo[] }>;
+  getMemos(): Promise<{ memos: Model.Memo[] }>;
 
   /**
    * 创建 Memo
