@@ -23,7 +23,7 @@ export default function useSelector<S extends State, A extends Action>(store: St
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [store]);
 
   return state;
 }

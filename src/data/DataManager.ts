@@ -4,7 +4,9 @@ export class DataManager {
   private static instance: DataManager;
   private currentDataSource: IDataSource | null = null;
 
-  private constructor() {}
+  private constructor() {
+    // Private constructor for singleton pattern
+  }
 
   public static getInstance(): DataManager {
     if (!DataManager.instance) {

@@ -102,9 +102,7 @@ export async function getDeletedMemos(): Promise<any[]> {
     } else {
       for (let i = 0; i < fileLines.length; i++) {
         const line = fileLines[i];
-        if (!/- /.test(line)) {
-          continue;
-        } else {
+        if (/- /.test(line)) {
           const id = extractIDfromText(line);
           const timeString = id.slice(0, 13);
           // const idString = parseInt(id.slice(14));

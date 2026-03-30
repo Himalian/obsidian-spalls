@@ -21,6 +21,7 @@ export default function useDebounce<T extends (...args: any[]) => any>(func: T, 
     timer.current = window.setTimeout(() => {
       func(...args);
     }, delay);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return run as T;

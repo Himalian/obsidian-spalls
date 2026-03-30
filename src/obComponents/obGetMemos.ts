@@ -1,8 +1,7 @@
-import { moment, normalizePath, Notice, TFile, TFolder } from 'obsidian';
+import { moment, normalizePath, Notice, TFile, type TFolder } from 'obsidian';
 import { getAllDailyNotes, getDateFromFile } from 'obsidian-daily-notes-interface';
 import appStore from '../stores/appStore';
 import {
-  CommentOnMemos,
   CommentsInOriginalNotes,
   DefaultMemoComposition,
   DeleteFileName,
@@ -355,7 +354,7 @@ const extractMinFromBulletLine = (line: string) => {
 
 const extractMemoTaskTypeFromLine = (line: string) =>
   //eslint-disable-next-line
-  /^\s*[\-\*]\s(\[(.{1})\])\s(.*)$/.exec(line)?.[2];
+  /^\s*[-*]\s(\[(.{1})\])\s(.*)$/.exec(line)?.[2];
 // The below line excludes entries with a ':' after the time as I was having issues with my calendar
 // being pulled in. Once made configurable will be simpler to manage.
 // return /^\s*[\-\*]\s(\[(\s|x|X|\\|\-|\>|D|\?|\/|\+|R|\!|i|B|P|C)\]\s)?(\<time\>)?\d{1,2}\:\d{2}[^:](.*)$/.test(line);

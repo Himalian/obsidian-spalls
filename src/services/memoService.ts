@@ -118,8 +118,6 @@ class MemoService {
     // memoService.fetchAllMemos();
   }
 
-
-
   public editMemo(memo: Model.Memo) {
     appStore.dispatch({
       type: 'EDIT_MEMO',
@@ -152,7 +150,7 @@ class MemoService {
     }
 
     const counts = {} as { [key: string]: number };
-    tags.forEach(function (x) {
+    tags.forEach((x) => {
       counts[x] = (counts[x] || 0) + 1;
     });
 
@@ -191,10 +189,10 @@ class MemoService {
 
   public async updateMemo(
     memoId: string,
-    originalText: string,
+    _originalText: string,
     text: string,
-    type?: string,
-    path?: string,
+    _type?: string,
+    _path?: string,
   ): Promise<Model.Memo> {
     const memo = await dataManager.updateMemo(memoId, text);
     return memo;
