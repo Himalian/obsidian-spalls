@@ -2,14 +2,13 @@ pre-commit:
   commands:
     lint:
       run: bun run eslint --ext .ts --fix {staged_files}
-      glob: 
-        - "*.ts"
-        - "*.tsx"
+      glob:
+        - '*.ts'
+        - '*.tsx'
     format:
       run: bun run prettier --write {staged_files}
-      glob: 
-        - "*.js"
-        - "*.ts"
-        - "*.tsx"
-        - "*.json"
-
+      glob:
+        - '*.js'
+        - '*.ts'
+        - '*.tsx'
+        - '*.json'
