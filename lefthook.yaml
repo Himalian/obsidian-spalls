@@ -1,7 +1,15 @@
 pre-commit:
   commands:
     lint:
-      run: bun run lint:fix
-      glob: '*.rb'
+      run: bun run eslint --ext .ts --fix {staged_files}
+      glob: 
+        - "*.ts"
+        - "*.tsx"
     format:
-      run: bun run format
+      run: bun run prettier --write {staged_files}
+      glob: 
+        - "*.js"
+        - "*.ts"
+        - "*.tsx"
+        - "*.json"
+

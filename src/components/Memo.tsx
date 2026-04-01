@@ -14,9 +14,9 @@ import {
 } from '../helpers/consts';
 import { encodeHtml, parseMarkedToHtml, parseRawTextToHtml } from '../helpers/marked';
 import useToggle from '../hooks/useToggle';
-import More from '../icons/more.svg?component';
-import TaskBlank from '../icons/task-blank.svg?component';
-import Task from '../icons/task.svg?component';
+import More from '../icons/more.svg?react';
+import TaskBlank from '../icons/task-blank.svg?react';
+import Task from '../icons/task.svg?react';
 import '../less/memo.less';
 import { DefaultEditorLocation, ShowTaskLabel, UseButtonToShowEditor } from '../memos';
 import { showMemoInDailyNotes } from '../obComponents/obShowMemo';

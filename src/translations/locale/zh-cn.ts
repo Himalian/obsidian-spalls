@@ -193,4 +193,8 @@ export default {
     '在 PC 上即使页面宽度小于 875px 时都展示左侧栏。默认为关闭',
   "You didn't set format for daily notes in both periodic-notes and daily-notes plugins.":
     '你在 Periodic Notes 插件和日记插件都没设置日记的格式',
+  'Default Data Source': '默认数据源',
+  'Select the default data source for creating memos.': '选择创建 memo 的默认数据源。',
+  'Daily Notes': '日记插件 (Daily Notes)',
+  'Single File': '单文件 (Single File)',
 };

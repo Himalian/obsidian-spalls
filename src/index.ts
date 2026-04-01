@@ -1,14 +1,14 @@
 import { Notice, Platform, Plugin, type TFile } from 'obsidian';
-import { FocusOnEditor, Memos, OpenDailyMemosWithMemos } from './memos';
-import { MEMOS_VIEW_TYPE } from './constants';
-import addIcons from './obComponents/customIcons';
-import { DEFAULT_SETTINGS, type MemosSettings, MemosSettingTab } from './setting';
 import showDailyMemoDiaryDialog from './components/DailyMemoDiaryDialog';
-import { t } from './translations/helper';
-import { memoService } from './services';
-
-import { dataManager } from './data/DataManager';
+import { MEMOS_VIEW_TYPE } from './constants';
 import { DailyNoteDataSource } from './data/DailyNoteDataSource';
+import { dataManager } from './data/DataManager';
+import { SingleFileDataSource } from './data/SingleFileDataSource';
+import { FocusOnEditor, Memos, OpenDailyMemosWithMemos } from './memos';
+import addIcons from './obComponents/customIcons';
+import { memoService } from './services';
+import { DEFAULT_SETTINGS, type MemosSettings, MemosSettingTab } from './setting';
+import { t } from './translations/helper';
 
 export default class MemosPlugin extends Plugin {
   public settings: MemosSettings;
@@ -17,8 +17,10 @@ export default class MemosPlugin extends Plugin {
     console.log('obsidian-memos loading...');
     await this.loadSettings();
 
-    // Initialize DataManager with DailyNoteDataSource
-    dataManager.setDataSource(new DailyNoteDataSource(this));
+    // Initialize DataSources
+    dataManager.registerDataSource('daily-notes', new DailyNoteDataSource(this));
+    dataManager.registerDataSource('single-file', new SingleFileDataSource(this));
+    dataManager.setDefaultDataSource(this.settings.DefaultDataSource || 'daily-notes');
 
     this.registerView(MEMOS_VIEW_TYPE, (leaf) => new Memos(leaf, this));
 

@@ -1,21 +1,28 @@
-import type React from 'react';
-import { forwardRef, type ReactNode, useCallback, useContext, useEffect, useImperativeHandle, useRef } from 'react';
+import React, {
+  forwardRef,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import TinyUndo from 'tiny-undo';
-import appContext from '../../stores/appContext';
 import { storage } from '../../helpers/storage';
 import useRefresh from '../../hooks/useRefresh';
+import appContext from '../../stores/appContext';
 import Only from '../common/OnlyWhen';
 import '../../less/editor.less';
 import ReactTextareaAutocomplete from '@webscopeio/react-textarea-autocomplete';
 import { usedTags } from '../../obComponents/obTagSuggester';
 import '../../less/suggest.less';
-import { FocusOnEditor, SaveMemoButtonIcon, SaveMemoButtonLabel } from '../../memos';
-import { getSuggestions } from '../../obComponents/obFileSuggester';
 import type { TFile } from 'obsidian';
-import appStore from '../../stores/appStore';
-import { t } from '../../translations/helper';
 import useState from 'react-usestateref';
 import { MEMOS_VIEW_TYPE } from '../../constants';
+import { FocusOnEditor, SaveMemoButtonIcon, SaveMemoButtonLabel } from '../../memos';
+import { getSuggestions } from '../../obComponents/obFileSuggester';
+import appStore from '../../stores/appStore';
+import { t } from '../../translations/helper';
 
 type ItemProps = {
   entity: {

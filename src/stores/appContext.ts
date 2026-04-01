@@ -1,6 +1,9 @@
 import { createContext } from 'react';
-import appStore from './appStore';
 
-const appContext = createContext(appStore.getState());
+// Avoid accessing appStore synchronously to prevent circular dependency ReferenceError
+const appContext = createContext<any>({} as any);
 
+/**
+ * @deprecated
+ */
 export default appContext;

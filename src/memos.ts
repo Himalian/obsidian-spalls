@@ -1,11 +1,11 @@
 import { debounce, type HoverPopover, ItemView, Platform, type TFile, type WorkspaceLeaf } from 'obsidian';
-import { MEMOS_VIEW_TYPE } from './constants';
+import { getDateFromFile } from 'obsidian-daily-notes-interface';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { MEMOS_VIEW_TYPE } from './constants';
 import type MemosPlugin from './index';
 import { dailyNotesService, globalStateService, memoService } from './services';
-import { getDateFromFile } from 'obsidian-daily-notes-interface';
 
 export class Memos extends ItemView {
   plugin: MemosPlugin;
@@ -164,6 +164,7 @@ export class Memos extends ItemView {
     ShowCommentOnMemos = this.plugin.settings.ShowCommentOnMemos;
     UseDailyOrPeriodic = this.plugin.settings.UseDailyOrPeriodic;
     ShowLeftSideBar = this.plugin.settings.ShowLeftSideBar;
+    DefaultDataSource = this.plugin.settings.DefaultDataSource;
 
     this.memosComponent = React.createElement(App);
 
@@ -212,3 +213,4 @@ export let FetchMemosFromNote: boolean;
 export let ShowCommentOnMemos: boolean;
 export let UseDailyOrPeriodic: string;
 export let ShowLeftSideBar: boolean;
+export let DefaultDataSource: string;

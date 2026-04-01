@@ -2,8 +2,8 @@ import type React from 'react';
 import { useEffect, useState } from 'react';
 import { DAILY_TIMESTAMP } from '../../helpers/consts';
 import '../../less/common/date-picker.less';
-import ArrowLeft from '../../icons/arrow-left.svg?component';
-import ArrowRight from '../../icons/arrow-right.svg?component';
+import ArrowLeft from '../../icons/arrow-left.svg?react';
+import ArrowRight from '../../icons/arrow-right.svg?react';
 import { t } from '../../translations/helper';
 
 interface DatePickerProps {

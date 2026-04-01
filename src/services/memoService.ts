@@ -177,13 +177,13 @@ class MemoService {
     return memos.filter((m) => m.content.includes(memoId));
   }
 
-  public async createMemo(text: string, isTASK: boolean): Promise<Model.Memo> {
-    const memo = await dataManager.createMemo(text, isTASK);
+  public async createMemo(text: string, isTASK: boolean, sourceId?: string): Promise<Model.Memo> {
+    const memo = await dataManager.createMemo(text, isTASK, undefined, sourceId);
     return memo;
   }
 
-  public async importMemos(text: string, isList: boolean, date: any): Promise<Model.Memo> {
-    const memo = await dataManager.createMemo(text, isList, date);
+  public async importMemos(text: string, isList: boolean, date: any, sourceId?: string): Promise<Model.Memo> {
+    const memo = await dataManager.createMemo(text, isList, date, sourceId);
     return memo;
   }
 

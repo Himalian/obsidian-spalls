@@ -2,7 +2,8 @@ import type { IDataExporter, IDataImporter, IDataSource } from './types';
 
 export class DataManager {
   private static instance: DataManager;
-  private currentDataSource: IDataSource | null = null;
+  private dataSources: Map<string, IDataSource> = new Map();
+  private defaultDataSourceId: string | null = null;
 
   private constructor() {
     // Private constructor for singleton pattern
@@ -15,35 +16,79 @@ export class DataManager {
     return DataManager.instance;
   }
 
+  /** @deprecated Use registerDataSource instead */
   public setDataSource(dataSource: IDataSource) {
-    this.currentDataSource = dataSource;
+    this.registerDataSource('default', dataSource);
+    this.setDefaultDataSource('default');
   }
 
-  public getDataSource(): IDataSource {
-    if (!this.currentDataSource) {
-      throw new Error('Data Source is not initialized.');
+  /** @deprecated Use getDataSource(id) instead */
+  public getDataSource(id?: string): IDataSource {
+    const targetId = id || this.defaultDataSourceId;
+    if (!targetId || !this.dataSources.has(targetId)) {
+      throw new Error('Data Source is not initialized or not found.');
     }
-    return this.currentDataSource;
+    return this.dataSources.get(targetId)!;
   }
 
-  // ============================================
-  // 数据源 Facade 接口
-  // ============================================
+  public registerDataSource(id: string, dataSource: IDataSource) {
+    this.dataSources.set(id, dataSource);
+  }
+
+  public unregisterDataSource(id: string) {
+    this.dataSources.delete(id);
+  }
+
+  public setDefaultDataSource(id: string) {
+    this.defaultDataSourceId = id;
+  }
 
   public async getMemos() {
-    return this.getDataSource().getMemos();
+    const allMemos: Model.Memo[] = [];
+    for (const dataSource of this.dataSources.values()) {
+      try {
+        const { memos } = await dataSource.getMemos();
+        allMemos.push(...memos);
+      } catch (e) {
+        console.error('Failed to get memos from data source:', e);
+      }
+    }
+    // Sort all memos by createdAt ascending or descending? Maybe not strictly required
+    // here since memoServices handles additional sorting, but we can return the combined array.
+    return { memos: allMemos };
   }
 
-  public async createMemo(content: string, isTask: boolean, date?: any) {
-    return this.getDataSource().createMemo(content, isTask, date);
+  public async createMemo(content: string, isTask: boolean, date?: any, sourceId?: string) {
+    const dataSource = this.getDataSource(sourceId);
+    return dataSource.createMemo(content, isTask, date);
   }
 
   public async updateMemo(memoId: string, content: string) {
-    return this.getDataSource().updateMemo(memoId, content);
+    // We try to update the memo in all data sources.
+    // The one that succeeds is the owner of the memo.
+    for (const dataSource of this.dataSources.values()) {
+      try {
+        const result = await dataSource.updateMemo(memoId, content);
+        if (result) return result;
+      } catch (e) {
+        // If it throws "not found" or similar, just continue to the next one
+        continue;
+      }
+    }
+    throw new Error(`Memo ${memoId} not found in any data source to update.`);
   }
 
   public async deleteMemo(memoId: string) {
-    return this.getDataSource().deleteMemo(memoId);
+    for (const dataSource of this.dataSources.values()) {
+      try {
+        const success = await dataSource.deleteMemo(memoId);
+        if (success) return true;
+      } catch (e) {
+        // Ignore errors and try the next one
+        continue;
+      }
+    }
+    return false; // Not found in any
   }
 
   // ============================================

@@ -4,7 +4,7 @@ import utils from '../helpers/utils';
 import { showDialog } from './Dialog';
 import '../less/preview-image-dialog.less';
 import appStore from '../stores/appStore';
-import Close from '../icons/close.svg?component';
+import Close from '../icons/close.svg?react';
 import { Notice } from 'obsidian';
 import { t } from '../translations/helper';
 
@@ -43,10 +43,10 @@ const PreviewImageDialog: React.FC<Props> = ({ destroy, imgUrl, filepath }: Prop
   };
 
   const convertBase64ToBlob = (base64: string, type: string) => {
-    var bytes = window.atob(base64);
-    var ab = new ArrayBuffer(bytes.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < bytes.length; i++) {
+    const bytes = window.atob(base64);
+    const ab = new ArrayBuffer(bytes.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < bytes.length; i++) {
       ia[i] = bytes.charCodeAt(i);
     }
     return new Blob([ab], { type: type });

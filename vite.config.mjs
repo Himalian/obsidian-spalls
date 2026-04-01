@@ -1,6 +1,6 @@
+import path from 'node:path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
         svgrOptions: {
           icon: true,
         },
-        include: '**/*.svg?component',
+        include: ['**/*.svg?component', '**/*.svg?react'],
         // This ensures that when you import with ?component, it's a React component
         // and default imports without suffix remain as strings/URLs
       }),

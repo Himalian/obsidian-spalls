@@ -1,23 +1,23 @@
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { memoService } from '../services';
-import toImage from '../labs/html2image';
-import useToggle from '../hooks/useToggle';
-import useLoading from '../hooks/useLoading';
+// biome-ignore lint/style/useImportType: <react import>
+import React, { useEffect, useRef, useState } from 'react';
 import { DAILY_TIMESTAMP } from '../helpers/consts';
 import utils from '../helpers/utils';
+import useLoading from '../hooks/useLoading';
+import useToggle from '../hooks/useToggle';
+import toImage from '../labs/html2image';
+import { memoService } from '../services';
+import DatePicker from './common/DatePicker';
+import DailyMemo from './DailyMemo';
 import { showDialog } from './Dialog';
 import showPreviewImageDialog from './PreviewImageDialog';
-import DailyMemo from './DailyMemo';
-import DatePicker from './common/DatePicker';
 import '../less/daily-memo-diary-dialog.less';
-import Close from '../icons/close.svg?component';
-import Share from '../icons/share.svg?component';
-import ArrowRight from '../icons/arrow-right.svg?component';
-import ArrowLeft from '../icons/arrow-left.svg?component';
-import { AutoSaveWhenOnMobile } from '../memos';
 import { moment, Platform, TFile } from 'obsidian';
 import { getAllDailyNotes } from 'obsidian-daily-notes-interface';
+import ArrowLeft from '../icons/arrow-left.svg?react';
+import ArrowRight from '../icons/arrow-right.svg?react';
+import Close from '../icons/close.svg?react';
+import Share from '../icons/share.svg?react';
+import { AutoSaveWhenOnMobile } from '../memos';
 import appStore from '../stores/appStore';
 import { t } from '../translations/helper';
 
@@ -54,10 +54,10 @@ const DailyMemoDiaryDialog: React.FC<Props> = (props: Props) => {
   }, [currentDateStamp]);
 
   const convertBase64ToBlob = (base64: string, type: string) => {
-    var bytes = window.atob(base64);
-    var ab = new ArrayBuffer(bytes.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < bytes.length; i++) {
+    const bytes = window.atob(base64);
+    const ab = new ArrayBuffer(bytes.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < bytes.length; i++) {
       ia[i] = bytes.charCodeAt(i);
     }
     return new Blob([ab], { type: type });

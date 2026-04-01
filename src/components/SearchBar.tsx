@@ -4,7 +4,7 @@ import { moment } from 'obsidian';
 import appContext from '../stores/appContext';
 import { locationService } from '../services';
 import { memoSpecialTypes } from '../helpers/filter';
-import Search from '../icons/search.svg?component';
+import Search from '../icons/search.svg?react';
 // import { Search } from 'lucide-react';
 import { t } from '../translations/helper';
 import useToggle from '../hooks/useToggle';

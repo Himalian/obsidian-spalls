@@ -7,7 +7,7 @@ import MenuBtnsPopup from './MenuBtnsPopup';
 import showDailyMemoDiaryDialog from './DailyMemoDiaryDialog';
 import '../less/user-banner.less';
 import { UserName } from '../memos';
-import More from '../icons/more.svg?component';
+import More from '../icons/more.svg?react';
 import { t } from '../translations/helper';
 
 type Props = {};

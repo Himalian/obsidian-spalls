@@ -1,8 +1,8 @@
 import { type App, type DropdownComponent, PluginSettingTab, Setting } from 'obsidian';
+import { getDailyNotePath } from './helpers/utils';
 import type MemosPlugin from './index';
 import memoService from './services/memoService';
 import { t } from './translations/helper';
-import { getDailyNotePath } from './helpers/utils';
 
 export interface MemosSettings {
   StartDate: string;
@@ -43,6 +43,8 @@ export interface MemosSettings {
   FetchMemosFromNote: boolean;
   ShowCommentOnMemos: boolean;
   ShowLeftSideBar: boolean;
+  DefaultDataSource: string;
+  SingleFilePath: string;
 }
 
 export const DEFAULT_SETTINGS: MemosSettings = {
@@ -82,6 +84,8 @@ export const DEFAULT_SETTINGS: MemosSettings = {
   FetchMemosFromNote: false,
   ShowCommentOnMemos: false,
   ShowLeftSideBar: false,
+  DefaultDataSource: 'daily-notes',
+  SingleFilePath: 'Thino/base.thino.md',
 };
 
 export class MemosSettingTab extends PluginSettingTab {
@@ -309,6 +313,18 @@ export class MemosSettingTab extends PluginSettingTab {
     //       this.applySettingsUpdate();
     //     });
     //   });
+
+    new Setting(containerEl)
+      .setName(t('Default Data Source'))
+      .setDesc(t('Select the default data source for creating memos.'))
+      .addDropdown(async (d: DropdownComponent) => {
+        d.addOption('daily-notes', t('Daily Notes'));
+        d.addOption('single-file', t('Single File'));
+        d.setValue(this.plugin.settings.DefaultDataSource).onChange(async (value) => {
+          this.plugin.settings.DefaultDataSource = value;
+          this.applySettingsUpdate();
+        });
+      });
 
     new Setting(containerEl)
       .setName(t('Default insert date format'))
@@ -569,13 +585,5 @@ export class MemosSettingTab extends PluginSettingTab {
       );
 
     this.containerEl.createEl('h1', { text: t('Say Thank You') });
-
-    new Setting(containerEl)
-      .setName(t('Donate'))
-      .setDesc(t('If you like this plugin, consider donating to support continued development:'))
-      // .setClass("AT-extra")
-      .addButton((bt) => {
-        bt.buttonEl.outerHTML = `<a href="https://www.buymeacoffee.com/boninall"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=boninall&button_colour=6495ED&font_colour=ffffff&font_family=Inter&outline_colour=000000&coffee_colour=FFDD00"></a>`;
-      });
   }
 }

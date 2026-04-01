@@ -5,7 +5,7 @@ import { formatMemoContent } from './Memo';
 import '../less/memo.less';
 import type React from 'react';
 import { Notice } from 'obsidian';
-import More from '../icons/more.svg?component';
+import More from '../icons/more.svg?react';
 import { t } from '../translations/helper';
 import MemoImage from './MemoImage';
 

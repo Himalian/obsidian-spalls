@@ -6,11 +6,9 @@
   "main": "main.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "dev": "bun run lint && vite build --watch --mode development",
+    "dev": "vite build --watch --mode development",
     "lint:fix": "eslint . --ext .ts --fix",
-    "prettier": "bunx prettier --check .",
-    "prettier:fix": "bunx prettier --write .",
-    "format": "bun run prettier:fix && bun run lint:fix",
+    "format": "prettier --write .",
     "build:nolint": "NODE_ENV=production rollup -c",
     "build": "vite build",
     "test": "vitest run",
@@ -59,10 +57,10 @@
     "tailwindcss": "^4.2.2",
     "typescript": "^4.5.5",
     "vite": "^5",
-    "vite-plugin-react-svg": "^0.2.0",
     "vite-plugin-static-copy": "^3.3.0",
     "vite-plugin-svgr": "^4.5.0",
-    "vitest": "^4.1.2"
+    "vitest": "^4.1.2",
+    "zx": "^8.8.5"
   },
   "license": "MIT"
 }

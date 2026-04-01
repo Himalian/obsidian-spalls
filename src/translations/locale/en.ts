@@ -215,4 +215,8 @@ export default {
     'Show left sidebar on PC even when the leaf width is less than 875px. False by default.',
   "You didn't set format for daily notes in both periodic-notes and daily-notes plugins.":
     "You didn't set format for daily notes in both periodic-notes and daily-notes plugins.",
+  'Default Data Source': 'Default Data Source',
+  'Select the default data source for creating memos.': 'Select the default data source for creating memos.',
+  'Daily Notes': 'Daily Notes',
+  'Single File': 'Single File',
 };
