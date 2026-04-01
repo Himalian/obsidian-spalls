@@ -1,4 +1,4 @@
-# Obsidian Memos (Thino) - Project Context
+# Obsidian Spalls - Project Context
 
 ## Project Overview
 

@@ -1,9 +1,9 @@
 {
-  "id": "obsidian-memos-fork",
-  "name": "Obsidian Memos Fork",
+  "id": "obsidian-spalls",
+  "name": "Obsidian Spalls",
   "description": "A plugin for capturing ideas in Obsidian",
   "version": "1.9.7",
-  "author": "Boninall",
+  "author": "Boninall Himalian",
   "authorUrl": "https://github.com/Quorafind/",
   "isDesktopOnly": false,
   "minAppVersion": "0.14.0"
