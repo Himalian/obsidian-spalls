@@ -1,7 +1,7 @@
 import { debounce, type HoverPopover, ItemView, Platform, type TFile, type WorkspaceLeaf } from 'obsidian';
 import { getDateFromFile } from 'obsidian-daily-notes-interface';
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, Root } from 'react-dom/client';
 import App from './App';
 import { MEMOS_VIEW_TYPE } from './constants';
 import type MemosPlugin from './index';
@@ -11,6 +11,7 @@ export class Memos extends ItemView {
   plugin: MemosPlugin;
   hoverPopover: HoverPopover | null;
   private memosComponent: React.ReactElement;
+  private root: Root | null = null;
 
   constructor(leaf: WorkspaceLeaf, plugin: MemosPlugin) {
     super(leaf);
@@ -168,13 +169,13 @@ export class Memos extends ItemView {
 
     this.memosComponent = React.createElement(App);
 
-    const root = createRoot(this?.contentEl);
-    root.render(this.memosComponent);
-    // ReactDOM.
+    // introduced in React-dom 19
+    this.root = createRoot(this?.contentEl);
+    this.root.render(this.memosComponent);
   }
 
   async onClose() {
-    // Nothing to clean up.
+    this.root?.unmount();
   }
 }
 
