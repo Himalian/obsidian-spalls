@@ -32,6 +32,7 @@ interface MemoProps {
   memo: Model.Memo;
 }
 
+/** @deprecated */
 export function formatMemoContent(content: string, memoid?: string) {
   let formattedContent = encodeHtml(content);
   formattedContent = parseRawTextToHtml(formattedContent)
@@ -77,7 +78,6 @@ export function formatMemoContent(content: string, memoid?: string) {
 }
 
 export default function Memo({ memo: propsMemo }: MemoProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // biome-ignore lint/correctness/noUnusedVariables: <Still in refactoring>
   const { globalState } = useContext(appContext);
   const [showConfirmDeleteBtn, toggleConfirmDeleteBtn] = useToggle(false);
