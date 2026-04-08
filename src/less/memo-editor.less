@@ -1,103 +1,40 @@
 @import './mixin.less';
 
-.theme-light div[data-type='memos_view'] .memo-editor-wrapper {
-  .flex(column, flex-start, flex-start);
-  position: relative;
-  width: 100%;
-  height: auto;
-  background-color: var(--background-primary);
-  padding: 16px;
-  // margin-bottom: 8px;
-  border-radius: 8px;
-  border: 1px solid var(--background-modifier-border);
+div[data-type='memos_view'] {
+	.memo-editor-wrapper {
+		&[data-purpose="Memo Editor Warpper"] {
 
-  &.edit-ing {
-    border-color: @text-blue;
-  }
+			/* Layout */
+			.flex(column, flex-start, flex-start);
+			position: relative;
+			width: 100%;
+			height: auto;
+			padding: 16px;
 
-  > .tip-text {
-    font-size: 12px;
-    line-height: 20px;
-    margin-top: 0px;
-    color: @text-lightgray;
-  }
+			/* Visuals */
+			background-color: var(--background-secondary);
+			// border-radius: 8px;
+			// border-color: var(--background-secondary);
+		}
+	}
 
-  > .memo-editor {
-    width: 100%;
-    height: auto;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    box-shadow: none;
-  }
-
-  > .date-picker {
-    position: absolute;
-    z-index: 20;
-  }
+	&.mobile-view {
+		.memo-editor-wrapper {
+			width: calc(100% - 24px);
+			margin: auto;
+		}
+	}
 }
 
-.theme-light div[data-type='memos_view'].mobile-view .memo-editor-wrapper {
-  width: calc(100% - 24px);
-  margin: auto;
-
-  // margin-bottom: 8px;
-}
-
-.theme-light .mobile-view img.memo-show-editor-button {
-  position: fixed;
-  z-index: 10;
-  filter: opacity(30%);
-}
-
-.theme-dark div[data-type='memos_view'] .memo-editor-wrapper {
-  .flex(column, flex-start, flex-start);
-  position: relative;
-  width: 100%;
-  height: auto;
-  background-color: var(--background-primary);
-  padding: 16px;
-  // margin-bottom: 8px;
-  border-radius: 8px;
-  border: 1px solid var(--background-modifier-border);
-
-  &.edit-ing {
-    border-color: rgb(60, 60, 60);
-  }
-
-  > .tip-text {
-    font-size: 12px;
-    line-height: 20px;
-    margin-top: 0px;
-    color: @text-dark-lightgray;
-  }
-
-  > .memo-editor {
-    width: 100%;
-    height: auto;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    box-shadow: none;
-  }
-
-  > .date-picker {
-    position: absolute;
-    z-index: 20;
-  }
-}
-
-.theme-dark div[data-type='memos_view'].mobile-view .memo-editor-wrapper {
-  width: calc(100% - 24px);
-  margin: auto;
-  // margin-bottom: 8px;
-}
-
-.theme-dark .mobile-view img.memo-show-editor-button {
-  position: fixed;
-  z-index: 10;
-  transition:
-    visibility 0s linear 0.5s,
-    opacity 0.5s linear;
-  filter: invert(0.8) opacity(65%);
+button.submit-button {
+	border-radius: 4px;
+	transition-duration: 200ms;
+	transition-timing-function: var(--ease-in-out);
+	background-color: var(--color-accent);
+	color: var(--color-white);
+	&:hover {
+		cursor: pointer;
+		filter: brightness(0.95);
+		// background-color: var(--text-accent-hover);
+	}
 }

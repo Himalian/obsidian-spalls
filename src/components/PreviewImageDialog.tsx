@@ -8,11 +8,13 @@ import Close from '../icons/close.svg?react';
 import { Notice } from 'obsidian';
 import { t } from '../translations/helper';
 
+/** @deprecated */
 interface Props extends DialogProps {
   imgUrl: string;
   filepath?: string;
 }
 
+/** @deprecated */
 const PreviewImageDialog: React.FC<Props> = ({ destroy, imgUrl, filepath }: Props) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const [imgWidth, setImgWidth] = useState<number>(-1);
@@ -103,6 +105,7 @@ const PreviewImageDialog: React.FC<Props> = ({ destroy, imgUrl, filepath }: Prop
   );
 };
 
+/** @deprecated */
 export default function showPreviewImageDialog(imgUrl: string, filepath?: string): void {
   if (filepath) {
     showDialog(

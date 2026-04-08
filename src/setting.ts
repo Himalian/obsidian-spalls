@@ -50,11 +50,11 @@ export interface MemosSettings {
 export const DEFAULT_SETTINGS: MemosSettings = {
   StartDate: 'Sunday',
   InsertAfter: '# Journal',
-  UserName: 'MEMO 😉',
+  UserName: 'User',
   ProcessEntriesBelow: '',
   Language: 'en',
-  SaveMemoButtonLabel: 'NOTEIT',
-  SaveMemoButtonIcon: '✍️',
+  SaveMemoButtonLabel: 'Note',
+  SaveMemoButtonIcon: '',
   ShareFooterStart: '{MemosNum} Memos {UsedDay} Day',
   ShareFooterEnd: '✍️ by {UserName}',
   DefaultPrefix: 'List',
@@ -109,8 +109,8 @@ export class MemosSettingTab extends PluginSettingTab {
 
   async changeFileName(originalFileName: string, fileName: string) {
     const filePath = getDailyNotePath();
-    const absolutePath = filePath + '/' + originalFileName + '.md';
-    const newFilePath = filePath + '/' + fileName + '.md';
+    const absolutePath = `${filePath}/${originalFileName}.md`;
+    const newFilePath = `${filePath}/${fileName}.md`;
     const getFile = this.app.vault.getAbstractFileByPath(absolutePath);
     // const deleteFile = this.app.metadataCache.getFirstLinkpathDest('', absolutePath);
     await this.app.fileManager.renameFile(getFile, newFilePath);

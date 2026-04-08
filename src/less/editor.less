@@ -1,230 +1,42 @@
-@import './mixin.less';
-
-.theme-light div[data-type='memos_view'] .common-editor-wrapper {
-  .flex(column, flex-start, flex-start);
-  position: relative;
+.common-editor-wrapper {
   width: 100%;
-  height: auto;
-  background-color: transparent;
+  display: flex;
+  flex-direction: column;
 
-  .rta,
-  .rta__textarea,
-  > .common-editor-inputer {
-    display: inline-block;
+  .common-editor-inputer {
     width: 100%;
-    min-height: 24px;
-    max-height: 300px;
-    font-size: 15px;
-    line-height: 24px;
-    resize: none;
-    overflow-x: hidden;
     border: none !important;
     outline: none !important;
+    resize: none !important;
+    background: transparent;
+    padding: 0;
+    margin: 0;
     box-shadow: none !important;
-    background-color: transparent;
-    z-index: 1;
-    margin-bottom: 4px;
-    white-space: pre-wrap;
-    .hide-scroll-bar();
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-normal);
 
     &::placeholder {
-      padding-left: 2px;
+      color: var(--text-faint);
     }
 
     &:focus {
+      box-shadow: none !important;
       border: none !important;
       outline: none !important;
-      box-shadow: none !important;
-      &::placeholder {
-        color: lightgray;
-      }
     }
   }
 
-  > .common-tools-wrapper {
-    .flex(row, space-between, center);
-    width: 100%;
-
-    > .common-tools-container {
-      .flex(row, flex-start, center);
-    }
-
-    > .btns-container {
-      .flex(row, flex-end, center);
-      flex-grow: 0;
-      flex-shrink: 0;
-
-      > .action-btn {
-        border: none;
-        user-select: none;
-        cursor: pointer;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-size: 13px;
-        line-height: 32px;
-
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-
-      > .cancel-btn {
-        color: gray;
-        background-color: transparent;
-        margin-right: 8px;
-        line-height: 18px;
-      }
-
-      > .confirm-btn {
-        cursor: pointer;
-        padding: 0 12px;
-        background-color: var(--interactive-accent);
-        color: var(--text-on-accent);
-
-        &:disabled {
-          cursor: not-allowed;
-          opacity: 0.6;
-        }
-
-        > .icon-text {
-          margin-left: 4px;
-        }
-      }
-    }
+  .common-tools-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
   }
 }
 
-.theme-light div[data-type='memos_view'] .scroll::-webkit-scrollbar {
-  display: none;
+/* 隐藏特定的 autocomplete 下拉框边框（如果需要） */
+.rta__autocomplete {
+  border: none !important;
 }
-
-.theme-dark div[data-type='memos_view'] .common-editor-wrapper {
-  .flex(column, flex-start, flex-start);
-  position: relative;
-  width: 100%;
-  height: auto;
-  background-color: transparent;
-
-  .rta,
-  .rta__textarea,
-  > .common-editor-inputer {
-    display: inline-block;
-    width: 100%;
-    min-height: 24px;
-    max-height: 300px;
-    font-size: 15px;
-    line-height: 24px;
-    resize: none;
-    overflow-x: hidden;
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    background-color: transparent;
-    z-index: 1;
-    margin-bottom: 4px;
-    white-space: pre-wrap;
-    .hide-scroll-bar();
-
-    &::placeholder {
-      padding-left: 2px;
-    }
-
-    &:focus {
-      border: none !important;
-      outline: none !important;
-      box-shadow: none !important;
-      &::placeholder {
-        color: rgb(54, 54, 54);
-      }
-    }
-  }
-
-  > .common-tools-wrapper {
-    .flex(row, space-between, center);
-    width: 100%;
-
-    > .common-tools-container {
-      .flex(row, flex-start, center);
-
-      > img {
-        filter: invert(0.8);
-        color: yellowgreen;
-      }
-    }
-
-    > .btns-container {
-      .flex(row, flex-end, center);
-      flex-grow: 0;
-      flex-shrink: 0;
-
-      > .action-btn {
-        border: none;
-        user-select: none;
-        cursor: pointer;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-size: 13px;
-        line-height: 32px;
-
-        > img {
-          filter: invert(0.8);
-        }
-
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-
-      > .cancel-btn {
-        color: gray;
-        background-color: transparent;
-        margin-right: 8px;
-        line-height: 18px;
-      }
-
-      > .confirm-btn {
-        cursor: pointer;
-        padding: 0 12px;
-        background-color: var(--interactive-accent);
-        color: var(--text-on-accent);
-
-        &:disabled {
-          cursor: not-allowed;
-          opacity: 0.6;
-        }
-
-        > .icon-text {
-          margin-left: 4px;
-        }
-      }
-    }
-  }
-}
-
-.theme-dark div[data-type='memos_view'] .scroll::-webkit-scrollbar {
-  display: none;
-}
-
-div[data-type='memos_view'] .memo-editor-wrapper {
-  .confirm-btn {
-    margin-right: unset;
-  }
-}
-
-// @media only screen and (max-width: 875px) {
-//   .is-mobile div[data-type="memos_view"] .cancel-btn {
-//     background-color: white;
-
-//     > .tags-container {
-//       height: auto;
-
-//       &:last-child {
-//         flex-grow: 1;
-//       }
-//     }
-//   }
-
-//   .rename-tag-dialog {
-//     padding-top: 64px;
-//   }
-// }

@@ -1,17 +1,20 @@
-import type React from 'react';
+/** @file MemoList.tsx
+ * @description A list of Memos. MemoList and MemoEditor are main components of this plugin.
+ */
+import 'react';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import appContext from '../stores/appContext';
-import { locationService, memoService, queryService } from '../services';
 import { FIRST_TAG_REG, IMAGE_URL_REG, LINK_REG, MEMO_LINK_REG, NOP_FIRST_TAG_REG, TAG_REG } from '../helpers/consts';
-import utils from '../helpers/utils';
 import { checkShouldShowMemoWithFilters } from '../helpers/filter';
+import utils from '../helpers/utils';
+import { locationService, memoService, queryService } from '../services';
+import appContext from '../stores/appContext';
 import Memo from './Memo';
 // import toastHelper from "./Toast";
 import '../less/memolist.less';
-import dailyNotesService from '../services/dailyNotesService';
-import appStore from '../stores/appStore';
 import { Notice, Platform } from 'obsidian';
 import { HideDoneTasks } from '../memos';
+import dailyNotesService from '../services/dailyNotesService';
+import appStore from '../stores/appStore';
 // import {moment} from 'obsidian';
 import { t } from '../translations/helper';
 
@@ -19,8 +22,10 @@ import { t } from '../translations/helper';
 
 type Props = {};
 
+/** @deprecated */
 export let copyShownMemos: Model.Memo[];
 
+/** @deprecated */
 const MemoList: React.FC<Props> = () => {
   const {
     locationState: { query },

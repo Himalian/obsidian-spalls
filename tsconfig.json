@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["src/components/*"]
+    },
     "allowSyntheticDefaultImports": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "module": "ESNext",
     "target": "esnext",
     "allowJs": true,
@@ -14,7 +18,6 @@
     "importHelpers": true,
     "noEmit": true,
     "lib": ["dom", "esnext", "DOM.Iterable", "scripthost", "es2015"],
-    "types": ["@honkhonk/vite-plugin-svgr/client"],
     "declaration": true,
     "declarationMap": true
   },

@@ -6,8 +6,8 @@ Obsidian Memos (also known as Thino) is a high-performance, quick-capture plugin
 
 ### Core Architecture
 
-- **Framework:** React 17 (Legacy version, but stable for this plugin).
-- **Styling:** Tailwind CSS (v4) is integrated via the Vite plugin (`@tailwindcss/vite`) and is the preferred method for new styling. Existing styles remain in Less files (compiled via Vite).
+- **Framework:** React 17 (Legacy version, but stable for this plugin), new components should use React 19+.
+- **Styling:** Tailwind CSS (v4) is integrated via the Vite plugin (`@tailwindcss/vite`) and is the preferred method for new and simple styling. Complex styles should use less for deep customizing.
 - **State Management:** Custom implementation in `src/labs/` and `src/stores/`.
 - **Obsidian Integration:** Extends the `Plugin` class from `obsidian` and utilizes `obsidian-daily-notes-interface` for daily note management.
 - **Build System:** Vite 3+ configured for library mode to output `main.js` and `styles.css` directly to the project root.
@@ -47,13 +47,14 @@ The project uses `bun` or `npm` for task management.
 - **Testing:**
   ```bash
   bun run test
-  # Uses Jest for unit testing.
+  # watch mode
+  bun run test:watch
   ```
 
 ## Development Conventions
 
 - **TypeScript:** Strict typing is preferred.
-- **Styling:** **Tailwind CSS is the preferred way for new styles.** Use utility classes directly in React components. Existing styles use Less files in `src/less/`.
+- **Styling:** **Tailwind CSS is the preferred way for simple styles.** Complex styles use Less files for deep customizing.
 - **Localization:** Use the translation helper in `src/translations/`.
 - **Obsidian API:** Always use `this.app` within the plugin context to access Obsidian's internal state.
 - **Components:** Functional components with Hooks are standard, though some legacy structures might exist.

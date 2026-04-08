@@ -16,6 +16,7 @@ interface LinkMatch {
   filepath?: string;
 }
 
+/** @deprecated */
 const MemoImage: React.FC<Props> = (props: Props) => {
   const { memo } = props;
 

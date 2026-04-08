@@ -7,11 +7,13 @@ import dailyNotesService from '../services/dailyNotesService';
 import { t } from '../translations/helper';
 import { Notice } from 'obsidian';
 
+/** @deprecated */
 interface Props {
   shownStatus: boolean;
   setShownStatus: (status: boolean) => void;
 }
 
+/** @deprecated */
 const MenuBtnsPopup: React.FC<Props> = (props: Props) => {
   const { shownStatus, setShownStatus } = props;
   const { app } = dailyNotesService.getState();

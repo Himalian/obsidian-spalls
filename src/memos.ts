@@ -1,7 +1,7 @@
 import { debounce, type HoverPopover, ItemView, Platform, type TFile, type WorkspaceLeaf } from 'obsidian';
 import { getDateFromFile } from 'obsidian-daily-notes-interface';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import { MEMOS_VIEW_TYPE } from './constants';
 import type MemosPlugin from './index';
@@ -168,8 +168,9 @@ export class Memos extends ItemView {
 
     this.memosComponent = React.createElement(App);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ReactDOM.render(this.memosComponent, (this as any).contentEl);
+    const root = createRoot(this?.contentEl);
+    root.render(this.memosComponent);
+    // ReactDOM.
   }
 
   async onClose() {

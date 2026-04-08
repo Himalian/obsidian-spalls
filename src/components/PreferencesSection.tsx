@@ -8,8 +8,10 @@ import type React from 'react';
 import checkboxActive from '../icons/checkbox-active.svg';
 import checkbox from '../icons/checkbox.svg';
 
+/** @deprecated */
 type Props = {};
 
+/** @deprecated */
 const PreferencesSection: React.FC<Props> = () => {
   const { globalState } = useContext(appContext);
   const { useTinyUndoHistoryCache, shouldHideImageUrl, shouldSplitMemoWord, shouldUseMarkdownParser } = globalState;

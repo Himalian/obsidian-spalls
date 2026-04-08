@@ -1,3 +1,7 @@
+/**
+ * @file Editor.tsx
+ * @description The Editor component. Note that this is only internal component
+ */
 import React, {
   forwardRef,
   type ReactNode,
@@ -70,7 +74,8 @@ export let editorInput: HTMLTextAreaElement;
 let actualToken: string;
 
 // eslint-disable-next-line react/display-name
-const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<EditorRefActions>) => {
+/** @deprecated */
+const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<EditorRefActions>) => {
   const {
     globalState: { useTinyUndoHistoryCache },
   } = useContext(appContext);
@@ -327,7 +332,6 @@ const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<EditorRef
           onKeyDown={handleEditorKeyDown}
           style={{
             minHeight: 48,
-            maxHeight: `${currentHeightRef.current > 400 ? currentHeightRef.current - 400 : 100}px`,
           }}
           dropdownStyle={{
             minWidth: 180,
@@ -364,15 +368,15 @@ const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<EditorRef
         />
       ) : (
         <textarea
-          style={{
-            minHeight: 48,
-          }}
           className="common-editor-inputer scroll"
           rows={1}
           placeholder={placeholder}
           ref={editorRef}
           onInput={handleEditorInput}
           onKeyDown={handleEditorKeyDown}
+          style={{
+            minHeight: 48,
+          }}
         ></textarea>
       )}
 
@@ -402,4 +406,4 @@ const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<EditorRef
   );
 });
 
-export default Editor;
+export default EditorLegacy;

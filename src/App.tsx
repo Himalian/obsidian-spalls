@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import 'react';
+import { useContext } from 'react';
 // import Home from './pages/Home';
 import './tailwind.css';
 import './less/app.less';
@@ -7,8 +8,8 @@ import appContext from './stores/appContext';
 import appStore from './stores/appStore';
 import './helpers/polyfill';
 import './less/global.less';
-import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
 import { Notice } from 'obsidian';
+import { appHasDailyNotesPluginLoaded } from 'obsidian-daily-notes-interface';
 import { appRouterSwitch } from './routers';
 import { t } from './translations/helper';
 

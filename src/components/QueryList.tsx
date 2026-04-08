@@ -13,8 +13,10 @@ import MoreWhite from '../icons/more-white.svg?react';
 import { Notice } from 'obsidian';
 import { t } from '../translations/helper';
 
+/** @deprecated */
 type Props = {};
 
+/** @deprecated */
 const QueryList: React.FC<Props> = () => {
   const {
     queryState: { queries },
@@ -62,11 +64,13 @@ const QueryList: React.FC<Props> = () => {
   );
 };
 
+/** @deprecated */
 interface QueryItemContainerProps {
   query: Model.Query;
   isActive: boolean;
 }
 
+/** @deprecated */
 const QueryItemContainer: React.FC<QueryItemContainerProps> = (props: QueryItemContainerProps) => {
   const { query, isActive } = props;
   const [showActionBtns, toggleShowActionBtns] = useToggle(false);

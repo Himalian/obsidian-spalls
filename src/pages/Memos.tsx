@@ -1,4 +1,4 @@
-import MemoEditor from '../components/MemoEditor';
+import MemoEditorLegacy from '../components/MemoEditor';
 import MemosHeader from '../components/MemosHeader';
 import MemoFilter from '../components/MemoFilter';
 import MemoList from '../components/MemoList';
@@ -13,14 +13,14 @@ function Memos() {
         <MemosHeader />
         <MemoFilter />
         <MemoList />
-        <MemoEditor />
+        <MemoEditorLegacy />
       </>
     );
   } else {
     return (
       <>
         <MemosHeader />
-        <MemoEditor />
+        <MemoEditorLegacy />
         <MemoFilter />
         <MemoList />
       </>

@@ -1,11 +1,11 @@
-import type React from 'react';
+import 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { MEMO_LINK_REG } from '../helpers/consts';
+import { parseHtmlToRawText } from '../helpers/marked';
 import utils from '../helpers/utils';
 import { globalStateService, memoService } from '../services';
-import { parseHtmlToRawText } from '../helpers/marked';
-import { formatMemoContent } from './Memo';
 import { showDialog } from './Dialog';
+import { formatMemoContent } from './Memo';
 import '../less/memo-card-dialog.less';
 import { Notice } from 'obsidian';
 import Close from '../icons/close.svg?react';
@@ -15,14 +15,21 @@ import MemoImage from './MemoImage';
 
 // import Share from "*.svg?react";
 
+/**
+ * @deprecated
+ */
 interface LinkedMemo extends FormattedMemo {
   dateStr: string;
 }
 
+/**
+ * @deprecated
+ */
 interface Props extends DialogProps {
   memo: Model.Memo;
 }
 
+/** @deprecated */
 const MemoCardDialog: React.FC<Props> = (props: Props) => {
   const [memo, setMemo] = useState<FormattedMemo>({
     ...props.memo,
@@ -207,6 +214,7 @@ const MemoCardDialog: React.FC<Props> = (props: Props) => {
   );
 };
 
+/** @deprecated */
 export default function showMemoCardDialog(memo: Model.Memo): void {
   showDialog(
     {

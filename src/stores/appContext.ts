@@ -1,9 +1,16 @@
+// biome-ignore lint/style/useImportType: <not refactored yet>
+import { App } from 'obsidian';
 import { createContext } from 'react';
 
-// Avoid accessing appStore synchronously to prevent circular dependency ReferenceError
+// biome-ignore lint/correctness/noUnusedVariables: <Not refactored yet>
+interface AppInstance {
+  dailyNotesState: {
+    app: App;
+  };
+}
 const appContext = createContext<any>({} as any);
 
 /**
- * @deprecated
+ * @type unknown
  */
 export default appContext;

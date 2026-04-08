@@ -10,6 +10,7 @@ interface Props {
   filepath?: string;
 }
 
+/** @deprecated */
 const Image: React.FC<Props> = (props: Props) => {
   const { className, imgUrl, alt, referrerPolicy, filepath } = props;
 

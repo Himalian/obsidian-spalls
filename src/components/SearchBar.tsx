@@ -11,11 +11,14 @@ import useToggle from '../hooks/useToggle';
 
 // import useToggle from "../hooks/useToggle";
 
+/** @deprecated */
 type Props = {};
 
+/** @deprecated */
 export let searchBoxInput: HTMLInputElement;
 // let isSearchBar = false as boolean;
 
+/** @deprecated */
 const SearchBar: React.FC<Props> = () => {
   const {
     locationState: {
