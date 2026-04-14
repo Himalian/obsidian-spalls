@@ -2,44 +2,55 @@
  * @file Editor.tsx
  * @description The Editor component. Note that this is only internal component
  */
-import React, {
-  forwardRef,
-  type ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import ReactTextareaAutocomplete from '@webscopeio/react-textarea-autocomplete';
+import type { App, TFile } from 'obsidian';
+import React, { type ReactNode, useContext, useEffect, useImperativeHandle, useRef } from 'react';
+import useState from 'react-usestateref';
 import TinyUndo from 'tiny-undo';
+import { MEMOS_VIEW_TYPE } from '../../constants';
 import { storage } from '../../helpers/storage';
 import useRefresh from '../../hooks/useRefresh';
-import appContext from '../../stores/appContext';
-import Only from '../common/OnlyWhen';
 import '../../less/editor.less';
-import ReactTextareaAutocomplete from '@webscopeio/react-textarea-autocomplete';
-import { usedTags } from '../../obComponents/obTagSuggester';
 import '../../less/suggest.less';
-import type { TFile } from 'obsidian';
-import useState from 'react-usestateref';
-import { MEMOS_VIEW_TYPE } from '../../constants';
 import { FocusOnEditor, SaveMemoButtonIcon, SaveMemoButtonLabel } from '../../memos';
 import { getSuggestions } from '../../obComponents/obFileSuggester';
+import { usedTags } from '../../obComponents/obTagSuggester';
+import appContext from '../../stores/appContext';
 import appStore from '../../stores/appStore';
 import { t } from '../../translations/helper';
+import Only from '../common/OnlyWhen';
 
+/**
+ * Obsidian global app instance.
+ */
+declare const app: App;
+
+/**
+ * @description Interface representing a suggestion item for tags or files.
+ */
+interface SuggestionItem {
+  char: string;
+  name: string;
+  file?: TFile;
+}
+
+/**
+ * @description Properties for the TItem component.
+ */
 type ItemProps = {
-  entity: {
-    char: string;
-    name: string;
-    file?: TFile;
-  };
+  entity: SuggestionItem;
 };
 
+/**
+ * @description Properties for the Loading component.
+ */
 type LoadingProps = {
   data: Array<{ name: string; char: string }>;
 };
 
+/**
+ * @description Actions exposed by the Editor component via ref.
+ */
 export interface EditorRefActions {
   element: HTMLTextAreaElement;
   focus: FunctionType;
@@ -48,6 +59,9 @@ export interface EditorRefActions {
   getContent: () => string;
 }
 
+/**
+ * @description Properties for the Editor component.
+ */
 interface EditorProps {
   className: string;
   inputerType: string;
@@ -61,21 +75,32 @@ interface EditorProps {
   onContentChange: (content: string) => void;
 }
 
-//eslint-disable-next-line
-const TItem = ({ entity: { name, char, file } }: ItemProps) => {
-  return <div>{`${char}`}</div>;
-};
-//eslint-disable-next-line
-const Loading = ({ data }: LoadingProps) => {
-  return <div>Loading</div>;
-};
+/**
+ * @description TItem component used in text area autocomplete to render tag and file suggestions.
+ * @param {ItemProps} props - The item properties including the character.
+ */
+function TItem({ entity: { char } }: ItemProps) {
+  return <div data-purpose="autocomplete-item">{`${char}`}</div>;
+}
+
+/**
+ * @description Loading component used when suggestions are being fetched.
+ * @param {LoadingProps} _props - The loading component properties.
+ */
+function Loading(_props: LoadingProps) {
+  return <div data-purpose="autocomplete-loading">Loading</div>;
+}
 
 export let editorInput: HTMLTextAreaElement;
 let actualToken: string;
 
-// eslint-disable-next-line react/display-name
-/** @deprecated */
-const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<EditorRefActions>) => {
+/**
+ * @description EditorLegacy component is a versatile text editor supporting internal tags,
+ * file references (via autocomplete), and undo/redo histories.
+ *
+ * @param {EditorProps & { ref?: React.Ref<EditorRefActions> }} props - The component properties.
+ */
+export default function Editor(props: EditorProps & { ref?: React.Ref<EditorRefActions> }) {
   const {
     globalState: { useTinyUndoHistoryCache },
   } = useContext(appContext);
@@ -89,14 +114,13 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
     onConfirmBtnClick: handleConfirmBtnClickCallback,
     onCancelBtnClick: handleCancelBtnClickCallback,
     onContentChange: handleContentChangeCallback,
+    ref,
   } = props;
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const tinyUndoRef = useRef<TinyUndo | null>(null);
   const refresh = useRefresh();
-  // const [value, setValue] = useState("")
 
-  const [, setHeight, currentHeightRef] = useState(0);
-  // const [showDatePicker, toggleShowDatePicker] = useToggle(false);
+  const [, setHeight] = useState(0);
 
   useEffect(() => {
     const leaves = app.workspace.getLeavesOfType(MEMOS_VIEW_TYPE);
@@ -108,11 +132,12 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
       leafView = leaf.view.containerEl;
       memosHeight = leafView.offsetHeight;
     } else {
-      leafView = document;
-      memosHeight = window.outerHeight;
+      leafView = document as any;
+      memosHeight = (window as any).outerHeight;
     }
 
     setHeight(memosHeight);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -124,6 +149,7 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
       editorRef.current.value = initialContent;
       refresh();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -197,10 +223,15 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
         return editorRef.current?.value ?? '';
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
-  const handleInsertTrigger = (event: { currentTrigger: string; item: any }) => {
+  /**
+   * @description Handles the selection of an item from the autocomplete dropdown.
+   * @param {Object} event - The selection event containing trigger type and item data.
+   */
+  function handleInsertTrigger(event: { currentTrigger: string; item: SuggestionItem }) {
     if (!editorRef.current) {
       return;
     }
@@ -230,12 +261,13 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
       handleContentChangeCallback(editorRef.current.value);
       refresh();
     } else if (event.currentTrigger === '[[') {
+      if (!event.item.file) return;
       const filePath = fileManager.generateMarkdownLink(event.item.file, event.item.file.path, '', '');
 
       const prevValue = editorRef.current.value;
       let removeCharNum;
       if (actualToken !== null && actualToken !== undefined) {
-        if (filePath.contains('[[')) {
+        if (filePath.includes('[[')) {
           removeCharNum = actualToken.length + 1;
         } else if (event.item.file.extension !== 'md') {
           removeCharNum = actualToken.length + 1;
@@ -260,14 +292,21 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
       handleContentChangeCallback(editorRef.current.value);
       refresh();
     }
-  };
+  }
 
-  const handleEditorInput = useCallback(() => {
+  /**
+   * @description Handles input changes in the editor.
+   */
+  function handleEditorInput() {
     handleContentChangeCallback(editorRef.current?.value ?? '');
     refresh();
-  }, []);
+  }
 
-  const handleEditorKeyDown = useCallback((event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  /**
+   * @description Handles keyboard events in the editor (e.g. submitting on Meta/Ctrl + Enter).
+   * @param {React.KeyboardEvent<HTMLTextAreaElement>} event - The keyboard event.
+   */
+  function handleEditorKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     event.stopPropagation();
 
     if (event.code === 'Enter') {
@@ -276,9 +315,12 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
       }
     }
     refresh();
-  }, []);
+  }
 
-  const handleCommonConfirmBtnClick = useCallback(() => {
+  /**
+   * @description Handles the confirmation (save) action for the editor.
+   */
+  function handleCommonConfirmBtnClick() {
     if (!editorRef.current) {
       return;
     }
@@ -293,39 +335,50 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
     refresh();
     // After confirm btn clicked, tiny-undo should reset state(clear actions and index)
     tinyUndoRef.current?.resetState();
-  }, []);
+  }
 
-  const handleCommonCancelBtnClick = useCallback(() => {
+  /**
+   * @description Handles the cancellation action for the editor.
+   */
+  function handleCommonCancelBtnClick() {
     handleCancelBtnClickCallback();
-  }, []);
+  }
 
-  const getEditorContentCache = (): string => {
+  /**
+   * @description Gets the cached content for the editor from storage.
+   * @returns {string} The cached content string.
+   */
+  function getEditorContentCache(): string {
     return storage.get(['editorContentCache']).editorContentCache ?? '';
-  };
+  }
 
-  const getEditorContent = (): string => {
+  /**
+   * @description Retrieves the current content of the editor, checking cache.
+   * @returns {string} The current editor content.
+   */
+  function getEditorContent(): string {
     if (!editorRef.current) {
-      return;
+      return '';
     }
 
     editorRef.current.value = getEditorContentCache();
-    // if( FocusOnEditor ){
-    //   editorRef.current?.focus();
-    // }
 
     return editorRef.current.value;
-  };
+  }
+
+  // Cast to any to bypass the strict JSX component type mismatch with React 17/19 types in third party lib
+  const Autocomplete = ReactTextareaAutocomplete as any;
 
   return (
-    <div className={'common-editor-wrapper ' + className}>
+    <div className={'common-editor-wrapper ' + className} data-purpose="editor-wrapper">
       {inputerType === 'memo' ? (
-        <ReactTextareaAutocomplete
+        <Autocomplete
           className="common-editor-inputer scroll"
           loadingComponent={Loading}
           placeholder={placeholder}
           movePopupAsYouType={true}
           value={getEditorContent()}
-          innerRef={(textarea) => {
+          innerRef={(textarea: HTMLTextAreaElement) => {
             editorRef.current = textarea;
           }}
           onInput={handleEditorInput}
@@ -343,26 +396,32 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
           scrollToItem={true}
           trigger={{
             '#': {
-              dataProvider: (token) => {
+              dataProvider: (token: string) => {
                 actualToken = token;
-                return usedTags(token).map(({ name, char }) => ({ name, char }));
+                return usedTags(token).map(
+                  ({ name, char }: { name: string; char: string }): SuggestionItem => ({ name, char }),
+                );
               },
-              //eslint-disable-next-line
               component: TItem,
               afterWhitespace: true,
-              output: (item) => item.char,
+              output: (item: SuggestionItem) => item.char,
             },
             '[[': {
-              dataProvider: (token) => {
+              dataProvider: (token: string) => {
                 actualToken = token;
                 return getSuggestions(token)
                   .slice(0, 10)
-                  .map(({ name, char, file }) => ({ name, char, file }));
+                  .map(
+                    ({ name, char, file }: { name: string; char: string; file: TFile }): SuggestionItem => ({
+                      name,
+                      char,
+                      file,
+                    }),
+                  );
               },
-              //eslint-disable-next-line
               component: TItem,
               afterWhitespace: true,
-              output: (item: string) => item.char,
+              output: (item: SuggestionItem) => item.char,
             },
           }}
         />
@@ -377,16 +436,17 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
           style={{
             minHeight: 48,
           }}
+          data-purpose="editor-textarea"
         ></textarea>
       )}
 
-      <div className="common-tools-wrapper">
-        <div className="common-tools-container">
+      <div className="common-tools-wrapper" data-purpose="tools-wrapper">
+        <div className="common-tools-container" data-purpose="tools-container">
           <Only when={props.tools !== undefined}>{props.tools}</Only>
         </div>
-        <div className="btns-container">
+        <div className="btns-container" data-purpose="action-buttons-container">
           <Only when={showCancelBtn}>
-            <button className="action-btn cancel-btn" onClick={handleCommonCancelBtnClick}>
+            <button className="action-btn cancel-btn" onClick={handleCommonCancelBtnClick} data-purpose="cancel-btn">
               {t('CANCEL EDIT')}
             </button>
           </Only>
@@ -395,6 +455,7 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
               className="action-btn confirm-btn"
               disabled={!editorRef.current?.value}
               onClick={handleCommonConfirmBtnClick}
+              data-purpose="confirm-btn"
             >
               {SaveMemoButtonLabel}
               <span className="icon-text">{SaveMemoButtonIcon}️</span>
@@ -404,6 +465,4 @@ const EditorLegacy = forwardRef((props: EditorProps, ref: React.ForwardedRef<Edi
       </div>
     </div>
   );
-});
-
-export default EditorLegacy;
+}

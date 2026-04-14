@@ -1,16 +1,6 @@
-// biome-ignore lint/style/useImportType: <not refactored yet>
-import { App } from 'obsidian';
 import { createContext } from 'react';
+import appStore, { type AppState } from './appStore';
 
-// biome-ignore lint/correctness/noUnusedVariables: <Not refactored yet>
-interface AppInstance {
-  dailyNotesState: {
-    app: App;
-  };
-}
-const appContext = createContext<any>({} as any);
+const appContext = createContext<AppState>(appStore.getState());
 
-/**
- * @type unknown
- */
 export default appContext;

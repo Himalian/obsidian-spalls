@@ -7,7 +7,7 @@ import * as userStore from './userStore';
 import * as queryStore from './queryStore';
 import * as dailyNotesStore from './dailyNotesStore';
 
-interface AppState {
+export interface AppState {
   globalState: globalStore.State;
   locationState: locationStore.State;
   memoState: memoStore.State;
@@ -16,7 +16,7 @@ interface AppState {
   dailyNotesState: dailyNotesStore.State;
 }
 
-type AppStateActions =
+export type AppStateActions =
   | globalStore.Actions
   | locationStore.Actions
   | memoStore.Actions
