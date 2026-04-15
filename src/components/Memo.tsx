@@ -1,9 +1,11 @@
 /** @file Memo.tsx
  * @description Single memo component.
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: <still in development> */
+/** biome-ignore-all lint/a11y/useKeyWithClickEvents: <explanation> */
+/** biome-ignore-all lint/a11y/noStaticElementInteractions: <explanation> */
 import { Notice, Platform } from 'obsidian';
 import 'react';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import {
   FIRST_TAG_REG,
   IMAGE_URL_REG,
@@ -27,6 +29,7 @@ import MarkdownRenderer from './MarkdownRenderer';
 import showMemoCardDialog from './MemoCardDialog';
 import showShareMemoImageDialog from './ShareMemoImageDialog';
 import '../less/memos-header.less';
+import { Archive, BookOpen, Copy, Home, Link, Pencil, Quote, Share2, Trash2 } from 'lucide-react';
 
 interface MemoProps {
   memo: Model.Memo;
@@ -82,11 +85,34 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
   const { globalState } = useContext(appContext);
   const [showConfirmDeleteBtn, toggleConfirmDeleteBtn] = useToggle(false);
 
-  const handleShowMemoStoryDialog = useCallback(() => {
+  // Reset confirm delete state when popover closes
+  useEffect(() => {
+    const popoverEl = document.getElementById(`memo-header-button-content-${propsMemo.id}`);
+    if (!popoverEl) return;
+
+    // Position is handled by CSS position-try-fallbacks (flip-block, flip-inline)
+    // Only reset confirm delete state when popover closes
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'popover') {
+          if (popoverEl.popover === 'manual' && showConfirmDeleteBtn) {
+            toggleConfirmDeleteBtn(false);
+          }
+        }
+      }
+    });
+
+    observer.observe(popoverEl, { attributes: true });
+    return () => {
+      observer.disconnect();
+    };
+  }, [showConfirmDeleteBtn, propsMemo.id, toggleConfirmDeleteBtn]);
+
+  const _handleShowMemoStoryDialog = useCallback(() => {
     showMemoCardDialog(propsMemo);
   }, [propsMemo]);
 
-  const handleMarkMemoClick = useCallback(() => {
+  const _handleMarkMemoClick = useCallback(() => {
     if (UseButtonToShowEditor && DefaultEditorLocation === 'Bottom') {
       const elem = document.querySelector(
         "div[data-type='memos_view'] .view-content .memo-show-editor-button",
@@ -119,7 +145,7 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
   const handleDeleteMemoClick = useCallback(async () => {
     if (showConfirmDeleteBtn) {
       try {
-        await memoService.hideMemoById(propsMemo.id);
+        await memoService.deleteMemoById(propsMemo.id);
       } catch (error: unknown) {
         if (error instanceof Error) {
           new Notice(error.message);
@@ -136,17 +162,17 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
     }
   }, [showConfirmDeleteBtn, propsMemo.id, toggleConfirmDeleteBtn]);
 
-  const handleMouseLeaveMemoWrapper = useCallback(() => {
+  const _handleMouseLeaveMemoWrapper = useCallback(() => {
     if (showConfirmDeleteBtn) {
       toggleConfirmDeleteBtn(false);
     }
   }, [showConfirmDeleteBtn, toggleConfirmDeleteBtn]);
 
-  const handleGenMemoImageBtnClick = useCallback(() => {
+  const _handleGenMemoImageBtnClick = useCallback(() => {
     showShareMemoImageDialog(propsMemo);
   }, [propsMemo]);
 
-  const handleMemoTypeShow = useCallback(() => {
+  const _handleMemoTypeShow = useCallback(() => {
     if (!ShowTaskLabel) {
       return null;
     }
@@ -160,11 +186,11 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
     return null;
   }, [propsMemo.memoType]);
 
-  const handleMemoDoubleClick = useCallback(() => {
+  const _handleMemoDoubleClick = useCallback(() => {
     handleEditMemoClick();
   }, [handleEditMemoClick]);
 
-  const handleMemoContentClick = useCallback(
+  const _handleMemoContentClick = useCallback(
     (e: React.MouseEvent) => {
       const targetEl = e.target as HTMLElement;
 
@@ -189,7 +215,7 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
     [handleSourceMemoClick],
   );
 
-  const imageProps = {
+  const _imageProps = {
     memo: propsMemo.content,
   };
   return (
@@ -201,9 +227,82 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
         <p data-purpose="time" className="text-(--text-faint) text-sm">
           {propsMemo.updatedAt}
         </p>
-        <button type="button" className="memo-header-icon clickable-icon btn">
-          <More data-purpose="action button" />
+        <button
+          type="button"
+          className="memo-header-button clickable-icon btn"
+          popoverTarget={`memo-header-button-content-${propsMemo.id}`}
+          style={{
+            anchorName: `--memo-header-button-${propsMemo.id}`,
+          }}
+        >
+          <More data-purpose="action button" className="text-(--text-normal)" fill="currentColor" />
         </button>
+        <div
+          id={`memo-header-button-content-${propsMemo.id}`}
+          data-purpose="Menu Content"
+          className="memo-header-button-content flex flex-col
+					rounded-lg p-2 gap-1 bg-(--background-secondary) border
+					border-(--background-modifier-border)"
+          popover="auto"
+          style={{
+            positionAnchor: `--memo-header-button-${propsMemo.id}`,
+          }}
+        >
+          {/* Quick action buttons */}
+          <div className="flex justify-around py-1">
+            <button type="button" className="p-1.5 rounded hover:bg-(--background-modifier-hover) cursor-pointer">
+              <Copy className="size-4 opacity-70" />
+            </button>
+            <button type="button" className="p-1.5 rounded hover:bg-(--background-modifier-hover) cursor-pointer">
+              <Pencil className="size-4 opacity-70" />
+            </button>
+            <button type="button" className="p-1.5 rounded hover:bg-(--background-modifier-hover) cursor-pointer">
+              <Share2 className="size-4 opacity-70" />
+            </button>
+          </div>
+
+          <div className="separator" />
+
+          {/* Copy links */}
+          <div className="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-(--text-normal) hover:bg-(--background-modifier-hover) cursor-pointer">
+            <Copy className="size-4 opacity-70" /> Copy embed link
+          </div>
+          <div className="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-(--text-normal) hover:bg-(--background-modifier-hover) cursor-pointer">
+            <Link className="size-4 opacity-70" /> Copy link
+          </div>
+
+          <div className="separator" />
+
+          {/* Read / Cite / Source */}
+          <div className="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-(--text-normal) hover:bg-(--background-modifier-hover) cursor-pointer">
+            <BookOpen className="size-4 opacity-70" /> Read
+          </div>
+          <div className="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-(--text-normal) hover:bg-(--background-modifier-hover) cursor-pointer">
+            <Quote className="size-4 opacity-70" /> Cite
+          </div>
+          <div className="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-(--text-normal) hover:bg-(--background-modifier-hover) cursor-pointer">
+            <Home className="size-4 opacity-70" /> Source
+          </div>
+
+          <div className="separator" />
+
+          {/* Danger zone */}
+          <div className="danger-row flex items-center gap-2 px-2 py-1.5 rounded text-sm cursor-pointer">
+            <Archive className="size-4 opacity-70" /> Archive
+          </div>
+          <div
+            className={`danger-row flex items-center gap-2 px-2 py-1.5 rounded text-sm cursor-pointer ${showConfirmDeleteBtn ? 'final-confirm' : ''}`}
+            onClick={handleDeleteMemoClick}
+          >
+            <Trash2 className="size-4 opacity-70 text-red-500" />
+            {showConfirmDeleteBtn ? 'Confirm to delete?' : 'Trash'}
+          </div>
+
+          <div className="separator" />
+
+          {/* Footer */}
+          <div className="flex justify-end px-2 py-0.5 text-xs text-(--text-muted)">4 words</div>
+        </div>
       </div>
       <span></span>
       <MarkdownRenderer className="" content={propsMemo.content} />

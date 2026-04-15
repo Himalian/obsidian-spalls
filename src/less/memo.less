@@ -52,3 +52,42 @@
 		}
 	}
 }
+
+button.memo-header-button {
+	anchor-name: --memo-header-button;
+}
+
+div.memo-header-button-content {
+	display: none; // hide by default
+
+}
+
+div.memo-header-button-content:popover-open {
+	// --memo-header-button is not defined, anchor-related properties removed
+	// position-anchor: --memo-header-button;
+	// position-area: bottom right;  // set in inline style
+
+	position-try-fallbacks:top, bottom, left, right, top left, top right, bottom left, bottom right;
+	position-area: bottom right;
+	overflow-y: auto;
+	max-height: 80vh;
+
+	overflow-x: hidden;
+
+
+	margin: 0;
+	display: flex;
+	max-width: fit-content;
+	flex-direction: column;
+	background-color: var(--background-secondary);
+	border-radius: 0.5rem;
+	padding: 0.25rem 0.25rem;
+
+	div {}
+
+	.separator {
+		height: 0;
+		margin: var(--size-2-3) calc(var(--size-2-3) * -1);
+		border-bottom: var(--border-width) solid var(--background-modifier-border);
+	}
+}

@@ -26,7 +26,7 @@ type Props = {};
 export let copyShownMemos: Model.Memo[];
 
 /** @deprecated */
-const MemoList: React.FC<Props> = () => {
+function MemoList() {
   const {
     locationState: { query },
     memoState: { memos },
@@ -207,6 +207,6 @@ const MemoList: React.FC<Props> = () => {
       </div>
     </div>
   );
-};
+}
 
 export default MemoList;

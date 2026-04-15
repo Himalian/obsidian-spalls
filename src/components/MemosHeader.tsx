@@ -98,10 +98,10 @@ export default function memosHeader() {
           <button
             type="button"
             data-purpose="Menu Button Icon"
-            className="flex items-center justify-center p-0 text-1.5xl clickable-icon btn"
+            className="flex items-center justify-center p-0 text-1.5xl text(--text-normal)"
             onClick={handleShowSidebarBtnClick}
           >
-            <MenuSvg />
+            <MenuSvg fill="currentColor" />
           </button>
         </Only>
         {/** biome-ignore lint/a11y/useKeyWithClickEvents: <Unecessary Accessibility> */}
