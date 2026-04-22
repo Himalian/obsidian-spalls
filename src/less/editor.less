@@ -1,42 +1,54 @@
 Editor.common-editor-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 
-  .common-editor-inputer {
-    width: 100%;
-    border: none !important;
-    outline: none !important;
-    resize: none !important;
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    box-shadow: none !important;
-    font-family: inherit;
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text-normal);
+	.common-editor-inputer {
+		width: 100%;
+		border: none !important;
+		outline: none !important;
+		resize: none !important;
+		background: transparent;
+		padding: 0;
+		margin: 0;
+		box-shadow: none !important;
+		font-family: inherit;
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--text-normal);
 
-    &::placeholder {
-      color: var(--text-faint);
-    }
+		&::placeholder {
+			color: var(--text-faint);
+		}
 
-    &:focus {
-      box-shadow: none !important;
-      border: none !important;
-      outline: none !important;
-    }
-  }
+		&:focus {
+			box-shadow: none !important;
+			border: none !important;
+			outline: none !important;
+		}
+	}
 
-  .common-tools-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 8px;
-  }
+	.common-tools-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 8px;
+	}
 }
 
 /* 隐藏特定的 autocomplete 下拉框边框（如果需要） */
 .rta__autocomplete {
-  border: none !important;
+	border: none !important;
+}
+
+div.spalls-editor {
+	width: 100%;
+	border-inline-start: none;
+
+	.inline-title {
+		display: none;
+	}
+	.markdown-embed-link {
+		display: none;
+	}
 }

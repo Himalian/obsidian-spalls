@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
           assetFileNames: 'styles.css',
           dir: '.',
         },
-        external: ['obsidian'],
+        external: ['obsidian', 'codemirror', '@coemirror/*'],
       },
       emptyOutDir: false,
     },
