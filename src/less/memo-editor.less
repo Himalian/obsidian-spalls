@@ -16,6 +16,15 @@ div[data-type='memos_view'] {
 			// border-radius: 8px;
 			// border-color: var(--background-secondary);
 		}
+
+		// .common-editor-wrapper &.common-editor-inputer &.cm-scroller &.markdown-source-view.mod-cm6 {}
+
+		.markdown-source-view.mod-cm6 {
+			height: auto;
+			overflow-x: hidden;
+			min-height: 1.5rem;
+			max-height: 7.5rem;
+		}
 	}
 
 	&.mobile-view {
@@ -32,6 +41,7 @@ button.submit-button {
 	transition-timing-function: var(--ease-in-out);
 	background-color: var(--color-accent);
 	color: var(--color-white);
+
 	&:hover {
 		cursor: pointer;
 		filter: brightness(0.95);
