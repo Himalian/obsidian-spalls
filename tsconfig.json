@@ -9,17 +9,17 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "jsx": "react-jsx",
-    "module": "ESNext",
+    "module": "node16",
     "target": "esnext",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "importHelpers": true,
     "noEmit": true,
     "lib": ["dom", "esnext", "DOM.Iterable", "scripthost", "es2015"],
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "src/data"]
+  "include": ["**/*.ts", "**/*.d.ts", "**/*.tsx", "src/data"]
 }
