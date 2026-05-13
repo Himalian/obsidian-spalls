@@ -12,8 +12,9 @@ div[data-type='memos_view'] .memolist-wrapper {
   .flex(column, flex-start, flex-start);
   flex-grow: 1;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  resize: both;
+  box-sizing: border-box;
+  overflow: hidden;
   gap: @memolist-gap;
   // .hide-scroll-bar();
 

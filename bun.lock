@@ -12,6 +12,7 @@
         "react": "^19.2.5",
         "react-dom": "^19.2.5",
         "react-popper": "^2.3.0",
+        "react-virtuoso": "^4.18.7",
         "tiny-undo": "^0.0.10",
       },
       "devDependencies": {
@@ -1424,6 +1425,8 @@
     "react-rnd": ["react-rnd@10.5.3", "", { "dependencies": { "re-resizable": "^6.11.2", "react-draggable": "^4.5.0", "tslib": "2.6.2" }, "peerDependencies": { "react": ">=16.3.0", "react-dom": ">=16.3.0" } }, "sha512-s/sIT3pGZnQ+57egijkTp9mizjIWrJz68Pq6yd+F/wniFY3IriML18dUXnQe/HP9uMiJ+9MAp44hljG99fZu6Q=="],
 
     "react-usestateref": ["react-usestateref@1.0.9", "", { "peerDependencies": { "react": ">16.0.0" } }, "sha512-t8KLsI7oje0HzfzGhxFXzuwbf1z9vhBM1ptHLUIHhYqZDKFuI5tzdhEVxSNzUkYxwF8XdpOErzHlKxvP7sTERw=="],
+
+    "react-virtuoso": ["react-virtuoso@4.18.7", "", { "peerDependencies": { "react": ">=16 || >=17 || >= 18 || >= 19", "react-dom": ">=16 || >=17 || >= 18 || >=19" } }, "sha512-xNF5zDGEEIMB7cKwcen/pLig0YDf6OnfFrVgKFa7sHPf9fRem0CaLshyObbBcP88jzn0enavL39EgplgdyT21g=="],
 
     "readdirp": ["readdirp@3.6.0", "", { "dependencies": { "picomatch": "^2.2.1" } }, "sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA=="],
 

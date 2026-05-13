@@ -17,6 +17,7 @@ import dailyNotesService from '../services/dailyNotesService';
 import appStore from '../stores/appStore';
 // import {moment} from 'obsidian';
 import { t } from '../translations/helper';
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 // import { DefaultEditorLocation } from '../memos';
 
@@ -36,7 +37,7 @@ function MemoList() {
   //   reverseMemos = memos.reverse();
   // }
   const [isFetching, setFetchStatus] = useState(true);
-  const wrapperElement = useRef<HTMLDivElement>(null);
+  const virtuosoRef = useRef<VirtuosoHandle>(null);
   const { tag: tagQuery, duration, type: memoContentType, text: textQuery, filter: queryId } = query;
   // const showMemoFilter = Boolean(tagQuery || (duration && duration.from < duration.to) || memoType || textQuery || queryId);
   const queryFilter = queryService.getQueryById(queryId);
@@ -160,7 +161,7 @@ function MemoList() {
   }, []);
 
   useEffect(() => {
-    wrapperElement.current?.scrollTo({ top: 0 });
+    virtuosoRef.current?.scrollTo({ top: 0 });
   }, [query]);
 
   const handleMemoListClick = useCallback((event: React.MouseEvent) => {
@@ -186,26 +187,36 @@ function MemoList() {
   }, []);
 
   return (
-    <div
-      className={`memolist-wrapper ${isFetching ? '' : 'completed'}`}
-      onClick={handleMemoListClick}
-      ref={wrapperElement}
-    >
-      {shownMemos.map((memo) => (
-        <Memo key={`${memo.id}-${memo.updatedAt}`} memo={memo} />
-      ))}
-      <div className="status-text-container">
-        <p className="status-text">
-          {isFetching
-            ? t('Fetching data...')
-            : shownMemos.length === 0
-              ? t('Noooop!')
-              : showMemoFilter
-                ? ''
-                : t('All Data is Loaded 🎉')}
-        </p>
+    <>
+      {/* <div className='flex '></div> */}
+      <div
+        // className={`memolist-wrapper ${isFetching ? '' : 'completed'}`}
+        className="flex flex-col w-full flex-1 min-h-0 overflow-hidden box-border"
+        onClick={handleMemoListClick}
+      >
+        <Virtuoso
+          className="w-full flex-1 min-h-0"
+          ref={virtuosoRef}
+          data={shownMemos}
+          itemContent={(_index, memo) => <Memo key={`${memo.id}-${memo.updatedAt}`} memo={memo} />}
+          components={{
+            Footer: () => (
+              <div className="status-text-container items-center justify-center w-full pt-2">
+                <p style={{ textAlign: 'center' }} className="status-text">
+                  {isFetching
+                    ? t('Fetching data...')
+                    : shownMemos.length === 0
+                      ? t('Noooop!')
+                      : showMemoFilter
+                        ? ''
+                        : t('All Data is Loaded 🎉')}
+                </p>
+              </div>
+            ),
+          }}
+        />
       </div>
-    </div>
+    </>
   );
 }
 
