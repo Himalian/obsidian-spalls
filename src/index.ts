@@ -152,11 +152,6 @@ export default class MemosPlugin extends Plugin {
     if (!(leaves.length > 0)) {
       return;
     }
-    if (this.settings.FocusOnEditor) {
-      const leaf = leaves[0];
-      leaf.view.containerEl.querySelector('textarea').focus();
-      return;
-    }
     if (!this.settings.OpenMemosAutomatically) {
       return;
     }
@@ -191,10 +186,6 @@ export default class MemosPlugin extends Plugin {
 
     if (!FocusOnEditor) {
       return;
-    }
-
-    if (leaf.view.containerEl.querySelector('textarea') !== undefined) {
-      leaf.view.containerEl.querySelector('textarea').focus();
     }
   }
 

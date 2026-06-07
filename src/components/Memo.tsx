@@ -108,40 +108,6 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
     };
   }, [showConfirmDeleteBtn, propsMemo.id, toggleConfirmDeleteBtn]);
 
-  const _handleShowMemoStoryDialog = useCallback(() => {
-    showMemoCardDialog(propsMemo);
-  }, [propsMemo]);
-
-  const _handleMarkMemoClick = useCallback(() => {
-    if (UseButtonToShowEditor && DefaultEditorLocation === 'Bottom') {
-      const elem = document.querySelector(
-        "div[data-type='memos_view'] .view-content .memo-show-editor-button",
-      ) as HTMLElement | null;
-      if (typeof elem?.onclick === 'function') {
-        elem.onclick.apply(elem);
-      }
-    }
-
-    globalStateService.setMarkMemoId(propsMemo.id);
-  }, [propsMemo.id]);
-
-  const handleEditMemoClick = useCallback(() => {
-    if (UseButtonToShowEditor && DefaultEditorLocation === 'Bottom' && Platform.isMobile) {
-      const elem = document.querySelector(
-        "div[data-type='memos_view'] .view-content .memo-show-editor-button",
-      ) as HTMLElement | null;
-      if (elem && typeof elem.onclick === 'function') {
-        elem.onclick.apply(elem);
-      }
-    }
-
-    globalStateService.setEditMemoId(propsMemo.id);
-  }, [propsMemo.id]);
-
-  const handleSourceMemoClick = useCallback(() => {
-    showMemoInDailyNotes(propsMemo.id, propsMemo.path);
-  }, [propsMemo.id, propsMemo.path]);
-
   const handleDeleteMemoClick = useCallback(async () => {
     if (showConfirmDeleteBtn) {
       try {
@@ -162,66 +128,21 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
     }
   }, [showConfirmDeleteBtn, propsMemo.id, toggleConfirmDeleteBtn]);
 
-  const _handleMouseLeaveMemoWrapper = useCallback(() => {
-    if (showConfirmDeleteBtn) {
-      toggleConfirmDeleteBtn(false);
-    }
-  }, [showConfirmDeleteBtn, toggleConfirmDeleteBtn]);
-
-  const _handleGenMemoImageBtnClick = useCallback(() => {
-    showShareMemoImageDialog(propsMemo);
-  }, [propsMemo]);
-
-  const _handleMemoTypeShow = useCallback(() => {
-    if (!ShowTaskLabel) {
-      return null;
-    }
-
-    if (propsMemo.memoType === 'TASK-TODO') {
-      return <TaskBlank />;
-    }
-    if (propsMemo.memoType === 'TASK-DONE') {
-      return <Task />;
-    }
-    return null;
-  }, [propsMemo.memoType]);
-
-  const _handleMemoDoubleClick = useCallback(() => {
-    handleEditMemoClick();
-  }, [handleEditMemoClick]);
-
-  const _handleMemoContentClick = useCallback(
-    (e: React.MouseEvent) => {
-      const targetEl = e.target as HTMLElement;
-
-      if (e.ctrlKey || e.metaKey) {
-        handleSourceMemoClick();
+  const handleEditMemoClick = useCallback(() => {
+    const popoverEl = document.getElementById(`memo-header-button-content-${propsMemo.id}`);
+    if (popoverEl && popoverEl.popover === 'auto') {
+      try {
+        popoverEl.hidePopover();
+      } catch (e) {
+        // Fallback if hidePopover is not supported
       }
-
-      if (targetEl.className === 'memo-link-text') {
-        const memoId = targetEl.dataset?.value;
-        const memoTemp = memoService.getMemoById(memoId ?? '');
-
-        if (memoTemp) {
-          showMemoCardDialog(memoTemp);
-        } else {
-          new Notice('MEMO Not Found');
-          targetEl.classList.remove('memo-link-text');
-        }
-      } else if (targetEl.className === 'todo-block') {
-        // intentionally empty
-      }
-    },
-    [handleSourceMemoClick],
-  );
-
-  const _imageProps = {
-    memo: propsMemo.content,
-  };
+    }
+    globalStateService.setEditMemoId(propsMemo.id);
+  }, [propsMemo.id]);
   return (
     <div
       data-purpose="Memo container"
-      className="flex flex-col justify-between rounded-md bg-(--background-secondary) w-full p-4 mb-0.5"
+      className="flex flex-col justify-between rounded-lg bg-(--background-secondary) w-full p-4 mb-0.5 border border-(--background-primary) dark:hover:border-gray-600 hover:border-b-gray-600 transition-colors duration-125"
     >
       <div data-purpose="Memo header" className="flex justify-between text-sm text-(--text-normal) w-full pb-2">
         <p data-purpose="time" className="text-(--text-faint) text-sm">
@@ -253,7 +174,11 @@ export default function Memo({ memo: propsMemo }: MemoProps) {
             <button type="button" className="p-1.5 rounded hover:bg-(--background-modifier-hover) cursor-pointer">
               <Copy className="size-4 opacity-70" />
             </button>
-            <button type="button" className="p-1.5 rounded hover:bg-(--background-modifier-hover) cursor-pointer">
+            <button
+              type="button"
+              className="p-1.5 rounded hover:bg-(--background-modifier-hover) cursor-pointer"
+              onClick={handleEditMemoClick}
+            >
               <Pencil className="size-4 opacity-70" />
             </button>
             <button type="button" className="p-1.5 rounded hover:bg-(--background-modifier-hover) cursor-pointer">

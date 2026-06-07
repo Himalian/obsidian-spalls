@@ -20,7 +20,6 @@ export interface MemosSettings {
   InsertDateFormat: string;
   DefaultEditorLocation: string;
   UseButtonToShowEditor: boolean;
-  FocusOnEditor: boolean;
   OpenDailyMemosWithMemos: boolean;
   HideDoneTasks: boolean;
   OpenMemosAutomatically: boolean;
